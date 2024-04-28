@@ -1,6 +1,6 @@
 # Workdir
 
-Working with directories and commands
+Working with directories and commands. See current Freeware version of Workdir at [dseichter.de](https://www.dseichter.de/workdir/).
 
 ## Badges
 
