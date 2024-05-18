@@ -48,14 +48,6 @@ class MainFrame(wx.Frame):
 
         self.SetMenuBar(self.m_menubar1)
 
-        fgSizer1 = wx.FlexGridSizer(0, 1, 0, 0)
-        fgSizer1.AddGrowableCol(0)
-        fgSizer1.AddGrowableRow(0)
-        fgSizer1.SetFlexibleDirection(wx.BOTH)
-        fgSizer1.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
-
-        self.SetSizer(fgSizer1)
-        self.Layout()
         self.Centre(wx.BOTH)
 
         # Connect Events
