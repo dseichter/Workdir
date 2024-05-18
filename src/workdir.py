@@ -56,59 +56,54 @@ class WorkDirFrame(gui.MainFrame):
         fgSizerMain.Add(self.panel, 1, wx.EXPAND | wx.ALL, 5)
         
         # add a sizer to the panel
-        fgSizer1 = wx.FlexGridSizer(0, 7, 0, 0)
-        fgSizer1.SetFlexibleDirection(wx.BOTH)
-        fgSizer1.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
+        fgSizerDirectory = wx.FlexGridSizer(0, 7, 0, 0)
+        fgSizerDirectory.SetFlexibleDirection(wx.BOTH)
+        fgSizerDirectory.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
         
         # add the sizer to the panel
-        self.panel.SetSizer(fgSizer1)
+        self.panel.SetSizer(fgSizerDirectory)
         self.panel.Layout()
-        fgSizer1.Fit(self.panel)
+        fgSizerDirectory.Fit(self.panel)
         
         for directory in directories:
             directoryname = wx.StaticText(self.panel, wx.ID_ANY, directory, wx.DefaultPosition, wx.DefaultSize, 0)
             directoryname.Wrap(-1)
-            fgSizer1.Add(directoryname, 1, wx.ALL | wx.EXPAND, 5)
+            fgSizerDirectory.Add(directoryname, 1, wx.ALL | wx.EXPAND, 5)
             
             newbuttonCMD1 = wx.Button(self.panel, wx.ID_ANY, u"CMD", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD1.SetToolTip('CMD1')
             newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD1Click(event, text=directory))
-            fgSizer1.Add(newbuttonCMD1, 0, wx.ALL, 5)
+            fgSizerDirectory.Add(newbuttonCMD1, 0, wx.ALL, 5)
             
             newbuttonCMD2 = wx.Button(self.panel, wx.ID_ANY, u"GIT BASH", wx.DefaultPosition, wx.DefaultSize, 0)
-            newbuttonCMD1.SetToolTip('CMD2')
-            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD2Click(event, text=directory))
-            fgSizer1.Add(newbuttonCMD2, 0, wx.ALL, 5)
+            newbuttonCMD2.SetToolTip('CMD2')
+            newbuttonCMD2.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD2Click(event, text=directory))
+            fgSizerDirectory.Add(newbuttonCMD2, 0, wx.ALL, 5)
             
             newbuttonCMD3 = wx.Button(self.panel, wx.ID_ANY, u"EXPLORER", wx.DefaultPosition, wx.DefaultSize, 0)
-            newbuttonCMD1.SetToolTip('CMD3')
-            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD3Click(event, text=directory))
-            fgSizer1.Add(newbuttonCMD3, 0, wx.ALL, 5)
+            newbuttonCMD3.SetToolTip('CMD3')
+            newbuttonCMD3.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD3Click(event, text=directory))
+            fgSizerDirectory.Add(newbuttonCMD3, 0, wx.ALL, 5)
             
             newbuttonCMD4 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
-            newbuttonCMD1.SetToolTip('CMD4')
-            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD4Click(event, text=directory))
-            fgSizer1.Add(newbuttonCMD4, 0, wx.ALL, 5)           
+            newbuttonCMD4.SetToolTip('CMD4')
+            newbuttonCMD4.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD4Click(event, text=directory))
+            fgSizerDirectory.Add(newbuttonCMD4, 0, wx.ALL, 5)           
             
             newbuttonCMD5 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
-            newbuttonCMD1.SetToolTip('CMD5')
-            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD5Click(event, text=directory))
-            fgSizer1.Add(newbuttonCMD5, 0, wx.ALL, 5)
+            newbuttonCMD5.SetToolTip('CMD5')
+            newbuttonCMD5.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD5Click(event, text=directory))
+            fgSizerDirectory.Add(newbuttonCMD5, 0, wx.ALL, 5)
             
             newbuttonCMD6 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
-            newbuttonCMD1.SetToolTip('CMD6')
-            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD6Click(event, text=directory))
-            fgSizer1.Add(newbuttonCMD6, 0, wx.ALL, 5)
+            newbuttonCMD6.SetToolTip('CMD6')
+            newbuttonCMD6.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD6Click(event, text=directory))
+            fgSizerDirectory.Add(newbuttonCMD6, 0, wx.ALL, 5)
 
         self.SetSizer(fgSizerMain)
         self.Layout()
         self.Fit()
-            
 
-    def buttonCMDclick6(self, event):
-        wx.MessageBox('Implement me!',
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)
         
 # mandatory in wx, create an app, False stands for not deteriction stdin/stdout
 # refer manual for details
