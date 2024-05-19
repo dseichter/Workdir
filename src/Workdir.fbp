@@ -160,7 +160,7 @@
       <property name="minimum_size"></property>
       <property name="name">dialogConfiguration</property>
       <property name="pos"></property>
-      <property name="size">876,483</property>
+      <property name="size">901,546</property>
       <property name="style">wxDEFAULT_DIALOG_STYLE</property>
       <property name="subclass">; ; forward_declare</property>
       <property name="title">Configuration</property>
@@ -169,16 +169,17 @@
       <property name="window_extra_style"></property>
       <property name="window_name"></property>
       <property name="window_style"></property>
+      <event name="OnShow">configurationShow</event>
       <object class="wxBoxSizer" expanded="true">
         <property name="minimum_size"></property>
         <property name="name">bSizer1</property>
         <property name="orient">wxVERTICAL</property>
         <property name="permission">none</property>
-        <object class="sizeritem" expanded="true">
+        <object class="sizeritem" expanded="false">
           <property name="border">5</property>
           <property name="flag">wxEXPAND | wxALL</property>
           <property name="proportion">1</property>
-          <object class="wxPanel" expanded="true">
+          <object class="wxPanel" expanded="false">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -285,7 +286,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Label</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -294,7 +295,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText2</property>
+                  <property name="name">staticTextLabel</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -347,7 +348,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Command</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -356,7 +357,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText3</property>
+                  <property name="name">staticTextCommand</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -409,7 +410,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Parameter</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -418,7 +419,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText4</property>
+                  <property name="name">staticTextParameter</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -471,7 +472,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Confirmation?</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -480,7 +481,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText5</property>
+                  <property name="name">staticTextConfirmation</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -533,7 +534,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Env Var?</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -542,7 +543,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText6</property>
+                  <property name="name">staticTextEnvVar</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -595,7 +596,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Font color</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -604,7 +605,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText7</property>
+                  <property name="name">staticTextFontColor</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -657,7 +658,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">CMD1</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -666,7 +667,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText8</property>
+                  <property name="name">staticTextCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -727,7 +728,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl1</property>
+                  <property name="name">textCtrlLabelCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -792,7 +793,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl2</property>
+                  <property name="name">textCtrlCommandCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -857,7 +858,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl3</property>
+                  <property name="name">textCtrlParameterCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -915,7 +916,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -923,7 +924,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox1</property>
+                  <property name="name">checkBoxConfirmCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -980,7 +981,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -988,7 +989,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox2</property>
+                  <property name="name">checkBoxEnvVarCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1052,7 +1053,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_colourPicker1</property>
+                  <property name="name">colourPickerCMD1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1108,7 +1109,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">CMD2</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -1117,7 +1118,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText9</property>
+                  <property name="name">staticTextCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1178,7 +1179,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl4</property>
+                  <property name="name">textCtrlLabelCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1243,7 +1244,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl5</property>
+                  <property name="name">textCtrlCommandCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1308,7 +1309,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl6</property>
+                  <property name="name">textCtrlParameterCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1366,7 +1367,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -1374,7 +1375,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox3</property>
+                  <property name="name">checkBoxConfirmCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1431,7 +1432,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -1439,7 +1440,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox4</property>
+                  <property name="name">checkBoxEnvVarCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1503,7 +1504,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_colourPicker2</property>
+                  <property name="name">colourPickerCMD2</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1559,7 +1560,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">CMD3</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -1568,7 +1569,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText10</property>
+                  <property name="name">staticTextCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1629,7 +1630,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl7</property>
+                  <property name="name">textCtrlLabelCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1694,7 +1695,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl8</property>
+                  <property name="name">textCtrlCommandCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1759,7 +1760,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl9</property>
+                  <property name="name">textCtrlParameterCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1817,7 +1818,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -1825,7 +1826,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox5</property>
+                  <property name="name">checkBoxConfirmCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1882,7 +1883,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -1890,7 +1891,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox6</property>
+                  <property name="name">checkBoxEnvVarCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -1954,7 +1955,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_colourPicker3</property>
+                  <property name="name">colourPickerCMD3</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2010,7 +2011,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">CMD4</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -2019,7 +2020,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText11</property>
+                  <property name="name">staticTextCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2080,7 +2081,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl10</property>
+                  <property name="name">textCtrlLabelCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2145,7 +2146,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl11</property>
+                  <property name="name">textCtrlCommandCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2210,7 +2211,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl12</property>
+                  <property name="name">textCtrlParameterCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2268,7 +2269,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -2276,7 +2277,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox7</property>
+                  <property name="name">checkBoxConfirmCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2333,7 +2334,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -2341,7 +2342,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox8</property>
+                  <property name="name">checkBoxEnvVarCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2405,7 +2406,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_colourPicker4</property>
+                  <property name="name">colourPickerCMD4</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2461,7 +2462,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">CMD5</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -2470,7 +2471,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText12</property>
+                  <property name="name">staticTextCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2531,7 +2532,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl13</property>
+                  <property name="name">textCtrlLabelCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2596,7 +2597,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl14</property>
+                  <property name="name">textCtrlCommandCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2661,7 +2662,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl15</property>
+                  <property name="name">textCtrlParameterCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2719,7 +2720,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -2727,7 +2728,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox9</property>
+                  <property name="name">checkBoxConfirmCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2784,7 +2785,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -2792,7 +2793,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox10</property>
+                  <property name="name">checkBoxEnvVarCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2856,7 +2857,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_colourPicker5</property>
+                  <property name="name">colourPickerCMD5</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2912,7 +2913,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">CMD6</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -2921,7 +2922,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText13</property>
+                  <property name="name">staticTextCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -2982,7 +2983,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl16</property>
+                  <property name="name">textCtrlLabelCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3047,7 +3048,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl17</property>
+                  <property name="name">textCtrlCommandCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3112,7 +3113,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl18</property>
+                  <property name="name">textCtrlParameterCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3170,7 +3171,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -3178,7 +3179,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox11</property>
+                  <property name="name">checkBoxConfirmCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3235,7 +3236,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">Check Me!</property>
+                  <property name="label"></property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
                   <property name="maximum_size"></property>
@@ -3243,7 +3244,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_checkBox12</property>
+                  <property name="name">checkBoxEnvVarCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3307,7 +3308,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_colourPicker6</property>
+                  <property name="name">colourPickerCMD6</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3337,7 +3338,7 @@
           <property name="border">5</property>
           <property name="flag">wxEXPAND | wxALL</property>
           <property name="proportion">1</property>
-          <object class="wxPanel" expanded="true">
+          <object class="wxPanel" expanded="false">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -3389,18 +3390,22 @@
             <property name="window_extra_style"></property>
             <property name="window_name"></property>
             <property name="window_style">wxTAB_TRAVERSAL</property>
-            <object class="wxGridSizer" expanded="true">
+            <object class="wxFlexGridSizer" expanded="false">
               <property name="cols">2</property>
+              <property name="flexible_direction">wxVERTICAL</property>
+              <property name="growablecols">0</property>
+              <property name="growablerows">1</property>
               <property name="hgap">0</property>
               <property name="minimum_size"></property>
-              <property name="name">gSizer1</property>
+              <property name="name">fgSizer2</property>
+              <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
               <property name="permission">none</property>
               <property name="rows">0</property>
               <property name="vgap">0</property>
               <object class="sizeritem" expanded="false">
                 <property name="border">5</property>
-                <property name="flag">wxALL</property>
-                <property name="proportion">0</property>
+                <property name="flag">wxALL|wxEXPAND</property>
+                <property name="proportion">1</property>
                 <object class="wxStaticText" expanded="false">
                   <property name="BottomDockable">1</property>
                   <property name="LeftDockable">1</property>
@@ -3430,7 +3435,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Directories</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -3439,7 +3444,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText14</property>
+                  <property name="name">staticTextDirectories</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3461,8 +3466,8 @@
               </object>
               <object class="sizeritem" expanded="false">
                 <property name="border">5</property>
-                <property name="flag">wxALL</property>
-                <property name="proportion">0</property>
+                <property name="flag">wxALL|wxEXPAND</property>
+                <property name="proportion">1</property>
                 <object class="wxStaticText" expanded="false">
                   <property name="BottomDockable">1</property>
                   <property name="LeftDockable">1</property>
@@ -3492,7 +3497,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Environment Variables</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -3501,7 +3506,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText15</property>
+                  <property name="name">staticTextEnvVar1</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3523,8 +3528,8 @@
               </object>
               <object class="sizeritem" expanded="false">
                 <property name="border">5</property>
-                <property name="flag">wxALL</property>
-                <property name="proportion">0</property>
+                <property name="flag">wxALL|wxEXPAND</property>
+                <property name="proportion">1</property>
                 <object class="wxTextCtrl" expanded="false">
                   <property name="BottomDockable">1</property>
                   <property name="LeftDockable">1</property>
@@ -3562,7 +3567,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl20</property>
+                  <property name="name">textCtrlDirectories</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3588,8 +3593,8 @@
               </object>
               <object class="sizeritem" expanded="false">
                 <property name="border">5</property>
-                <property name="flag">wxALL</property>
-                <property name="proportion">0</property>
+                <property name="flag">wxALL|wxEXPAND</property>
+                <property name="proportion">1</property>
                 <object class="wxTextCtrl" expanded="false">
                   <property name="BottomDockable">1</property>
                   <property name="LeftDockable">1</property>
@@ -3627,7 +3632,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_textCtrl21</property>
+                  <property name="name">textCtrlEnvVars</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3653,8 +3658,8 @@
               </object>
               <object class="sizeritem" expanded="false">
                 <property name="border">5</property>
-                <property name="flag">wxALL</property>
-                <property name="proportion">0</property>
+                <property name="flag">wxALL|wxEXPAND</property>
+                <property name="proportion">1</property>
                 <object class="wxStaticText" expanded="false">
                   <property name="BottomDockable">1</property>
                   <property name="LeftDockable">1</property>
@@ -3684,7 +3689,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Add one directory each line. If a directory is not available, no commands will be enabled.</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -3693,7 +3698,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText16</property>
+                  <property name="name">staticTextDirectoriesNotes</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3715,8 +3720,8 @@
               </object>
               <object class="sizeritem" expanded="false">
                 <property name="border">5</property>
-                <property name="flag">wxALL</property>
-                <property name="proportion">0</property>
+                <property name="flag">wxALL|wxEXPAND</property>
+                <property name="proportion">1</property>
                 <object class="wxStaticText" expanded="false">
                   <property name="BottomDockable">1</property>
                   <property name="LeftDockable">1</property>
@@ -3746,7 +3751,7 @@
                   <property name="gripper">0</property>
                   <property name="hidden">0</property>
                   <property name="id">wxID_ANY</property>
-                  <property name="label">MyLabel</property>
+                  <property name="label">Add one Key/Pair (Key=Value) in each line to provide as environment variable.</property>
                   <property name="markup">0</property>
                   <property name="max_size"></property>
                   <property name="maximize_button">0</property>
@@ -3755,7 +3760,7 @@
                   <property name="minimize_button">0</property>
                   <property name="minimum_size"></property>
                   <property name="moveable">1</property>
-                  <property name="name">m_staticText17</property>
+                  <property name="name">staticTextEnvVarNotes</property>
                   <property name="pane_border">1</property>
                   <property name="pane_position"></property>
                   <property name="pane_size"></property>
@@ -3776,6 +3781,25 @@
                 </object>
               </object>
             </object>
+          </object>
+        </object>
+        <object class="sizeritem" expanded="true">
+          <property name="border">5</property>
+          <property name="flag">wxEXPAND</property>
+          <property name="proportion">0</property>
+          <object class="wxStdDialogButtonSizer" expanded="true">
+            <property name="Apply">0</property>
+            <property name="Cancel">1</property>
+            <property name="ContextHelp">0</property>
+            <property name="Help">0</property>
+            <property name="No">0</property>
+            <property name="OK">0</property>
+            <property name="Save">1</property>
+            <property name="Yes">0</property>
+            <property name="minimum_size"></property>
+            <property name="name">m_sdbSizer2</property>
+            <property name="permission">protected</property>
+            <event name="OnSaveButtonClick">configurationSave</event>
           </object>
         </object>
       </object>

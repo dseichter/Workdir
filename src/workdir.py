@@ -2,7 +2,12 @@
 import wx
 # import the newly created GUI file
 import gui
-
+# import common libraries
+import subprocess
+import os
+# import workdir specific libraries
+import settings
+import configuration_ui
 
 class WorkDirFrame(gui.MainFrame):
     # constructor
@@ -10,42 +15,137 @@ class WorkDirFrame(gui.MainFrame):
         # initialize parent class
         gui.MainFrame.__init__(self, parent)
         
-    def newbuttonCMD1Click(self, event, text=None):
-        wx.MessageBox('Implement me 1!' + text,
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)
+    def newbuttonCMD1Click(self, event, dir=None):
+        cmd = settings.load_command('CMD1')
+        command = cmd['command'].replace('{directory}', dir)
+        parameters = cmd['parameters'].replace('{directory}', dir)
+        executecmd = command + ' ' + parameters
+        env = os.environ.copy()
+        if cmd['use_env']:
+            # extend the environment with the additional environment variables
+            additionalenv = settings.load_env_vars()
+            for key in additionalenv:
+                env[key] = additionalenv[key]
+
+        if cmd['confirmation']:
+            dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            if result == wx.ID_NO:
+                return
+            
+        subprocess.Popen(executecmd, cwd=dir, env=None)
         
-    def newbuttonCMD2Click(self, event, text=None):
-        wx.MessageBox('Implement me 2!' + text,
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)
+    def newbuttonCMD2Click(self, event, dir=None):
+        cmd = settings.load_command('CMD2')
+        command = cmd['command'].replace('{directory}', dir)
+        parameters = cmd['parameters'].replace('{directory}', dir)
+        executecmd = command + ' ' + parameters
+        env = os.environ.copy()
+        if cmd['use_env']:
+            # extend the environment with the additional environment variables
+            additionalenv = settings.load_env_vars()
+            for key in additionalenv:
+                env[key] = additionalenv[key]
+
+        if cmd['confirmation']:
+            dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            if result == wx.ID_NO:
+                return
+            
+        subprocess.Popen(executecmd, cwd=dir, env=None)
         
-    def newbuttonCMD3Click(self, event, text=None):
-        wx.MessageBox('Implement me 3!' + text,
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)
+    def newbuttonCMD3Click(self, event, dir=None):
+        cmd = settings.load_command('CMD3')
+        command = cmd['command'].replace('{directory}', dir)
+        parameters = cmd['parameters'].replace('{directory}', dir)
+        executecmd = command + ' ' + parameters
+        env = os.environ.copy()
+        if cmd['use_env']:
+            # extend the environment with the additional environment variables
+            additionalenv = settings.load_env_vars()
+            for key in additionalenv:
+                env[key] = additionalenv[key]
+
+        if cmd['confirmation']:
+            dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            if result == wx.ID_NO:
+                return
+            
+        subprocess.Popen(executecmd, cwd=dir, env=None)
         
-    def newbuttonCMD4Click(self, event, text=None):
-        wx.MessageBox('Implement me 4!' + text,
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)
+    def newbuttonCMD4Click(self, event, dir=None):
+        cmd = settings.load_command('CMD4')
+        command = cmd['command'].replace('{directory}', dir)
+        parameters = cmd['parameters'].replace('{directory}', dir)
+        executecmd = command + ' ' + parameters
+        env = os.environ.copy()
+        if cmd['use_env']:
+            # extend the environment with the additional environment variables
+            additionalenv = settings.load_env_vars()
+            for key in additionalenv:
+                env[key] = additionalenv[key]
+
+        if cmd['confirmation']:
+            dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            if result == wx.ID_NO:
+                return
+            
+        subprocess.Popen(executecmd, cwd=dir, env=None)
         
-    def newbuttonCMD5Click(self, event, text=None):
-        wx.MessageBox('Implement me 5!' + text,
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)
+    def newbuttonCMD5Click(self, event, dir=None):
+        cmd = settings.load_command('CMD5')
+        command = cmd['command'].replace('{directory}', dir)
+        parameters = cmd['parameters'].replace('{directory}', dir)
+        executecmd = command + ' ' + parameters
+        env = os.environ.copy()
+        if cmd['use_env']:
+            # extend the environment with the additional environment variables
+            additionalenv = settings.load_env_vars()
+            for key in additionalenv:
+                env[key] = additionalenv[key]
+
+        if cmd['confirmation']:
+            dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            if result == wx.ID_NO:
+                return
+            
+        subprocess.Popen(executecmd, cwd=dir, env=None)
         
-    def newbuttonCMD6Click(self, event, text=None):
-        wx.MessageBox('Implement me 6!' + text,
-                      'Info',
-                      wx.OK | wx.ICON_INFORMATION)    
+    def newbuttonCMD6Click(self, event, dir=None):
+        cmd = settings.load_command('CMD6')
+        command = cmd['command'].replace('{directory}', dir)
+        parameters = cmd['parameters'].replace('{directory}', dir)
+        executecmd = command + ' ' + parameters
+        env = os.environ.copy()
+        if cmd['use_env']:
+            # extend the environment with the additional environment variables
+            additionalenv = settings.load_env_vars()
+            for key in additionalenv:
+                env[key] = additionalenv[key]
+
+        if cmd['confirmation']:
+            dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            if result == wx.ID_NO:
+                return
+
+        subprocess.Popen(executecmd, cwd=dir, env=None)
     
         
     def workdirClose(self, event):
         self.Close()
 
     def workdirShow(self, event):
-        directories = ['C:\\', 'C:\\temp', 'C:\\Users\\dseichter\\Projects\\dseichter\\Workdir']
+        # check if config.json exists, if not create it
+        if not os.path.exists('config.json'):
+            with open('config.json', 'w') as f:
+                f.write('{}')
+        
+        directories = settings.load_directories()
         
         fgSizerMain = wx.FlexGridSizer(0, 1, 0, 0)
         fgSizerMain.SetFlexibleDirection(wx.BOTH)
@@ -72,37 +172,50 @@ class WorkDirFrame(gui.MainFrame):
             
             newbuttonCMD1 = wx.Button(self.panel, wx.ID_ANY, u"CMD", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD1.SetToolTip('CMD1')
-            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD1Click(event, text=directory))
+            newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD1Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD1, 0, wx.ALL, 5)
             
             newbuttonCMD2 = wx.Button(self.panel, wx.ID_ANY, u"GIT BASH", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD2.SetToolTip('CMD2')
-            newbuttonCMD2.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD2Click(event, text=directory))
+            newbuttonCMD2.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD2Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD2, 0, wx.ALL, 5)
             
             newbuttonCMD3 = wx.Button(self.panel, wx.ID_ANY, u"EXPLORER", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD3.SetToolTip('CMD3')
-            newbuttonCMD3.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD3Click(event, text=directory))
+            newbuttonCMD3.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD3Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD3, 0, wx.ALL, 5)
             
             newbuttonCMD4 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD4.SetToolTip('CMD4')
-            newbuttonCMD4.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD4Click(event, text=directory))
+            newbuttonCMD4.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD4Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD4, 0, wx.ALL, 5)           
             
             newbuttonCMD5 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD5.SetToolTip('CMD5')
-            newbuttonCMD5.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD5Click(event, text=directory))
+            newbuttonCMD5.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD5Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD5, 0, wx.ALL, 5)
             
             newbuttonCMD6 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD6.SetToolTip('CMD6')
-            newbuttonCMD6.Bind(wx.EVT_BUTTON, lambda event: self.newbuttonCMD6Click(event, text=directory))
+            newbuttonCMD6.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD6Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD6, 0, wx.ALL, 5)
 
         self.SetSizer(fgSizerMain)
         self.Layout()
         self.Fit()
+        
+    def miExtrasConfiguration(self, event):
+        # open the configuration dialog
+        dlg = configuration_ui.dialogConfiguration(self)
+        dlg.ShowModal()
+        dlg.Destroy()
+
+    def miHelpAbout(self, event):
+        # open the about dialog
+        dlg = gui.dialogAbout(self)
+        dlg.ShowModal()
+        dlg.Destroy()
+
 
         
 # mandatory in wx, create an app, False stands for not deteriction stdin/stdout
