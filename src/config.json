@@ -1,0 +1,1 @@
+{"directories": ["C:\\", "d:\\"], "env": ["A=B"], "CMD1": {"label": "label", "command": "command", "parameters": "parameters", "use_env": true, "confirmation": true}}

@@ -5,10 +5,10 @@ def load_command(key):
     with open('config.json', 'r') as f:
         data = json.load(f)
 
-    if key not in data['commands']:
+    if key not in data:
         return None
 
-    return data['commands'][key]
+    return data[key]
 
 # load value from json file with given key
 def load_env_vars():
@@ -55,7 +55,7 @@ def save_command(key, cmd):
     with open('config.json', 'r') as f:
         data = json.load(f)
 
-    data['commands'][key] = cmd
+    data[key] = cmd
 
     with open('config.json', 'w') as f:
         json.dump(data, f)

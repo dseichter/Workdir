@@ -17,12 +17,15 @@ class dialogConfiguration(gui.dialogConfiguration):
         # load the configuration
         directories = settings.load_directories()
         if directories is not None:
-            self.textCtrlDirectories.SetValue(directories['directories'])
+            # parse arra of strings into a single string
+            directories = '\n'.join(directories)
+            self.textCtrlDirectories.SetValue(directories)
 
         # load the environment variables
         env = settings.load_env_vars()
         if env is not None:
-            self.textCtrlEnvVars.SetValue(env['env'])    
+            env = '\n'.join(env)
+            self.textCtrlEnvVars.SetValue(env)    
             
         # load the commands
         cmd1 = settings.load_command('CMD1')
@@ -32,16 +35,18 @@ class dialogConfiguration(gui.dialogConfiguration):
             self.textCtrlParameterCMD1.SetValue(cmd1['parameters'])
             self.checkBoxConfirmCMD1.SetValue(cmd1['use_env'])
             self.checkBoxEnvVarCMD1.SetValue(cmd1['confirmation'])
-            self.colourPickerCMD1.SetColour(cmd1['colour'])
+            #self.colourPickerCMD1.SetColour(cmd1['colour'])
 
     def configurationSave(self, event):
         # save the configuration
         directories = {}
-        directories['directories'] = self.textCtrlDirectories.GetValue()
+        
+        # save textCtrlDirectories into array of strings
+        directories = self.textCtrlDirectories.GetValue().split('\n')
         settings.save_directories(directories)
         
         env = {}
-        env['env'] = self.textCtrlEnvVars.GetValue()
+        env = self.textCtrlEnvVars.GetValue().split('\n')
         settings.save_env_vars(env)
         
         cmd1 = {}
@@ -50,7 +55,7 @@ class dialogConfiguration(gui.dialogConfiguration):
         cmd1['parameters'] = self.textCtrlParameterCMD1.GetValue()
         cmd1['use_env'] = self.checkBoxConfirmCMD1.GetValue()
         cmd1['confirmation'] = self.checkBoxEnvVarCMD1.GetValue()
-        cmd1['colour'] = self.colourPickerCMD1.GetColour()
+        #cmd1['colour'] = self.colourPickerCMD1.GetColour()
         settings.save_command('CMD1', cmd1)
         
         
