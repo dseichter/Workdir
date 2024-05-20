@@ -12,7 +12,9 @@ import wx.xrc
 
 ID_CLOSE = 1000
 ID_CONFIGURATION = 1001
-ID_ABOUT = 1002
+ID_GET_HELP = 1002
+ID_CHECK_FOR_UPDATES = 1003
+ID_ABOUT = 1004
 
 
 # #########################################################################
@@ -41,6 +43,12 @@ class MainFrame(wx.Frame):
         self.m_menubar1.Append(self.menuItemExtras, u"Extras")
 
         self.menuitemHelp = wx.Menu()
+        self.getHelp = wx.MenuItem(self.menuitemHelp, ID_GET_HELP, u"Get help...", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuitemHelp.Append(self.getHelp)
+
+        self.checkForUpdates = wx.MenuItem(self.menuitemHelp, ID_CHECK_FOR_UPDATES, u"Check for updates", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuitemHelp.Append(self.checkForUpdates)
+
         self.menuitemHelpAbout = wx.MenuItem(self.menuitemHelp, ID_ABOUT, u"About", wx.EmptyString, wx.ITEM_NORMAL)
         self.menuitemHelp.Append(self.menuitemHelpAbout)
 
@@ -55,6 +63,8 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_SHOW, self.workdirShow)
         self.Bind(wx.EVT_MENU, self.miFileClose, id=self.menuitemFileClose.GetId())
         self.Bind(wx.EVT_MENU, self.miExtrasConfiguration, id=self.menuitemExtrasConfiguration.GetId())
+        self.Bind(wx.EVT_MENU, self.miHelpSupport, id=self.getHelp.GetId())
+        self.Bind(wx.EVT_MENU, self.miHelpUpdate, id=self.checkForUpdates.GetId())
         self.Bind(wx.EVT_MENU, self.miHelpAbout, id=self.menuitemHelpAbout.GetId())
 
     def __del__(self):
@@ -71,6 +81,12 @@ class MainFrame(wx.Frame):
         event.Skip()
 
     def miExtrasConfiguration(self, event):
+        event.Skip()
+
+    def miHelpSupport(self, event):
+        event.Skip()
+
+    def miHelpUpdate(self, event):
         event.Skip()
 
     def miHelpAbout(self, event):

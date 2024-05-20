@@ -129,6 +129,34 @@
             <property name="checked">0</property>
             <property name="enabled">1</property>
             <property name="help"></property>
+            <property name="id">ID_GET_HELP</property>
+            <property name="kind">wxITEM_NORMAL</property>
+            <property name="label">Get help...</property>
+            <property name="name">getHelp</property>
+            <property name="permission">none</property>
+            <property name="shortcut"></property>
+            <property name="unchecked_bitmap"></property>
+            <event name="OnMenuSelection">miHelpSupport</event>
+          </object>
+          <object class="wxMenuItem" expanded="true">
+            <property name="bitmap"></property>
+            <property name="checked">0</property>
+            <property name="enabled">1</property>
+            <property name="help"></property>
+            <property name="id">ID_CHECK_FOR_UPDATES</property>
+            <property name="kind">wxITEM_NORMAL</property>
+            <property name="label">Check for updates</property>
+            <property name="name">checkForUpdates</property>
+            <property name="permission">none</property>
+            <property name="shortcut"></property>
+            <property name="unchecked_bitmap"></property>
+            <event name="OnMenuSelection">miHelpUpdate</event>
+          </object>
+          <object class="wxMenuItem" expanded="true">
+            <property name="bitmap"></property>
+            <property name="checked">0</property>
+            <property name="enabled">1</property>
+            <property name="help"></property>
             <property name="id">ID_ABOUT</property>
             <property name="kind">wxITEM_NORMAL</property>
             <property name="label">About</property>

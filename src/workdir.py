@@ -3,11 +3,14 @@ import wx
 # import the newly created GUI file
 import gui
 # import common libraries
+import webbrowser
 import subprocess
 import os
 # import workdir specific libraries
 import settings
 import configuration_ui
+import about_ui
+import helper
 
 class WorkDirFrame(gui.MainFrame):
     # constructor
@@ -222,9 +225,18 @@ class WorkDirFrame(gui.MainFrame):
 
     def miHelpAbout(self, event):
         # open the about dialog
-        dlg = gui.dialogAbout(self)
+        dlg = about_ui.dialogAbout(self)
         dlg.ShowModal()
         dlg.Destroy()
+        
+    def miHelpSupport(self, event):
+        webbrowser.open_new_tab('https://github.com/dseichter/Workdir')  # Add the URL of the GitHub repository
+
+    def miHelpUpdate(self, event):
+        if helper.check_for_new_release():
+            wx.MessageBox('A new release is available.', 'Update available', wx.OK | wx.ICON_INFORMATION)
+        else:
+            wx.MessageBox('No new release available.', 'No update', wx.OK | wx.ICON_INFORMATION)   
 
 
         
