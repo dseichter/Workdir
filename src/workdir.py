@@ -140,10 +140,8 @@ class WorkDirFrame(gui.MainFrame):
         self.Close()
 
     def workdirShow(self, event):
-        # check if config.json exists, if not create it
-        if not os.path.exists('config.json'):
-            with open('config.json', 'w') as f:
-                f.write('{}')
+        # check if config.json exists, if not create it, if available, update it
+        settings.create_config()
         
         directories = settings.load_directories()
         
@@ -169,34 +167,46 @@ class WorkDirFrame(gui.MainFrame):
             directoryname = wx.StaticText(self.panel, wx.ID_ANY, directory, wx.DefaultPosition, wx.DefaultSize, 0)
             directoryname.Wrap(-1)
             fgSizerDirectory.Add(directoryname, 1, wx.ALL | wx.EXPAND, 5)
-            
+
+            cmd = settings.load_command('CMD1')            
             newbuttonCMD1 = wx.Button(self.panel, wx.ID_ANY, u"CMD", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD1.SetToolTip('CMD1')
+            newbuttonCMD1.ForegroundColour = wx.Colour(cmd['colour'])
             newbuttonCMD1.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD1Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD1, 0, wx.ALL, 5)
             
+            cmd = settings.load_command('CMD2') 
             newbuttonCMD2 = wx.Button(self.panel, wx.ID_ANY, u"GIT BASH", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD2.SetToolTip('CMD2')
+            newbuttonCMD2.ForegroundColour = wx.Colour(cmd['colour'])
             newbuttonCMD2.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD2Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD2, 0, wx.ALL, 5)
             
+            cmd = settings.load_command('CMD3') 
             newbuttonCMD3 = wx.Button(self.panel, wx.ID_ANY, u"EXPLORER", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD3.SetToolTip('CMD3')
+            newbuttonCMD3.ForegroundColour = wx.Colour(cmd['colour'])
             newbuttonCMD3.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD3Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD3, 0, wx.ALL, 5)
             
+            cmd = settings.load_command('CMD4') 
             newbuttonCMD4 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD4.SetToolTip('CMD4')
+            newbuttonCMD4.ForegroundColour = wx.Colour(cmd['colour'])
             newbuttonCMD4.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD4Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD4, 0, wx.ALL, 5)           
             
+            cmd = settings.load_command('CMD5') 
             newbuttonCMD5 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD5.SetToolTip('CMD5')
+            newbuttonCMD5.ForegroundColour = wx.Colour(cmd['colour'])
             newbuttonCMD5.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD5Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD5, 0, wx.ALL, 5)
             
+            cmd = settings.load_command('CMD6') 
             newbuttonCMD6 = wx.Button(self.panel, wx.ID_ANY, u"n/a", wx.DefaultPosition, wx.DefaultSize, 0)
             newbuttonCMD6.SetToolTip('CMD6')
+            newbuttonCMD6.ForegroundColour = wx.Colour(cmd['colour'])
             newbuttonCMD6.Bind(wx.EVT_BUTTON, lambda event,dir=directory: self.newbuttonCMD6Click(event, dir))
             fgSizerDirectory.Add(newbuttonCMD6, 0, wx.ALL, 5)
 
