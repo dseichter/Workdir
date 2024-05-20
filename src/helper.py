@@ -4,6 +4,8 @@ import logging
 
 VERSION = "1.0.0"
 URL = 'https://api.github.com/repos/dseichter/Workdir/releases/latest'
+NAME = 'Workdir'
+LICENCE = 'GPL-3.0'
 
 
 def check_for_new_release():
