@@ -1,18 +1,18 @@
 {
     "CMD1": {
         "colour": "#FF0000",
-        "command": "command",
+        "command": "cmd",
         "confirmation": true,
-        "label": "label",
-        "parameters": "parameters",
+        "label": "CMD",
+        "parameters": "",
         "use_env": true
     },
     "CMD2": {
         "colour": "#000000",
-        "command": "",
+        "command": "explorer",
         "confirmation": false,
-        "label": "",
-        "parameters": "",
+        "label": "EXPLORER",
+        "parameters": "/select, \"{directory}\"",
         "use_env": false
     },
     "CMD3": {
@@ -51,7 +51,5 @@
         "C:\\",
         "d:\\"
     ],
-    "env": [
-        "A=B"
-    ]
+    "env": []
 }
