@@ -20,3 +20,13 @@ Install the required dependencies
 ```pip install -r src/requirements.txt```
 
 If you want to do some UI changes, download and install the latest wxFormBuilder from the [wxFormBuilder Homepage](https://github.com/wxFormBuilder/wxFormBuilder).
+
+## Some screenshots
+
+### Workdir
+
+![single validation](images/workdir.png)
+
+### Configuration
+
+![batch validation](images/configuration.png)
