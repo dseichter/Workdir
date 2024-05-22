@@ -48,8 +48,10 @@
         "use_env": false
     },
     "directories": [
-        "C:\\",
-        "d:\\"
+        "C:\\Users\\dseichter\\Projects\\dseichter\\Workdir",
+        "C:\\Users\\dseichter\\Projects\\dseichter\\vatservice-gui"
     ],
-    "env": []
+    "env": [
+        ""
+    ]
 }

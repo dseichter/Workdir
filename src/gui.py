@@ -111,6 +111,7 @@ class dialogConfiguration(wx.Dialog):
         fgSizer6.SetFlexibleDirection(wx.BOTH)
         fgSizer6.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
+
         fgSizer6.Add((0, 0), 1, wx.EXPAND, 5)
         self.staticTextLabel = wx.StaticText(self.m_panel5, wx.ID_ANY, u"Label", wx.DefaultPosition, wx.DefaultSize, 0)
         self.staticTextLabel.Wrap(-1)
@@ -335,5 +336,12 @@ class dialogAbout(wx.Dialog):
         bSizer2.Fit(self)
         self.Centre(wx.BOTH)
 
+        # Connect Events
+        self.staticTextGithub.Bind(wx.EVT_LEFT_DOWN, self.openGithub)
+
     def __del__(self):
         pass
+    # Virtual event handlers, override them in your derived class
+
+    def openGithub(self, event):
+        event.Skip()

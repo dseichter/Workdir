@@ -158,6 +158,9 @@ class WorkDirFrame(gui.MainFrame):
         # check if config.json exists, if not create it, if available, update it
         settings.create_config()
 
+        # add the version to the label
+        self.SetTitle(helper.NAME + ' ' + helper.VERSION)
+
         directories = settings.load_directories()
 
         fgSizerMain = wx.FlexGridSizer(0, 1, 0, 0)
