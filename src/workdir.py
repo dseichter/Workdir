@@ -28,8 +28,10 @@ class WorkDirFrame(gui.MainFrame):
         if cmd['use_env']:
             # extend the environment with the additional environment variables
             additionalenv = settings.load_env_vars()
-            for key in additionalenv:
-                env[key] = additionalenv[key]
+            for customenv in additionalenv:
+                key = customenv.split('=')[0]
+                value = customenv.split('=')[1]
+                env[key] = value
 
         if cmd['confirmation']:
             dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
@@ -37,7 +39,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        subprocess.Popen(executecmd, cwd=dir, env=None)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD2Click(self, event, dir=None):
         cmd = settings.load_command('CMD2')
@@ -48,8 +50,10 @@ class WorkDirFrame(gui.MainFrame):
         if cmd['use_env']:
             # extend the environment with the additional environment variables
             additionalenv = settings.load_env_vars()
-            for key in additionalenv:
-                env[key] = additionalenv[key]
+            for customenv in additionalenv:
+                key = customenv.split('=')[0]
+                value = customenv.split('=')[1]
+                env[key] = value
 
         if cmd['confirmation']:
             dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
@@ -57,7 +61,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        subprocess.Popen(executecmd, cwd=dir, env=None)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD3Click(self, event, dir=None):
         cmd = settings.load_command('CMD3')
@@ -68,8 +72,10 @@ class WorkDirFrame(gui.MainFrame):
         if cmd['use_env']:
             # extend the environment with the additional environment variables
             additionalenv = settings.load_env_vars()
-            for key in additionalenv:
-                env[key] = additionalenv[key]
+            for customenv in additionalenv:
+                key = customenv.split('=')[0]
+                value = customenv.split('=')[1]
+                env[key] = value
 
         if cmd['confirmation']:
             dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
@@ -77,7 +83,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        subprocess.Popen(executecmd, cwd=dir, env=None)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD4Click(self, event, dir=None):
         cmd = settings.load_command('CMD4')
@@ -88,8 +94,10 @@ class WorkDirFrame(gui.MainFrame):
         if cmd['use_env']:
             # extend the environment with the additional environment variables
             additionalenv = settings.load_env_vars()
-            for key in additionalenv:
-                env[key] = additionalenv[key]
+            for customenv in additionalenv:
+                key = customenv.split('=')[0]
+                value = customenv.split('=')[1]
+                env[key] = value
 
         if cmd['confirmation']:
             dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
@@ -97,7 +105,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        subprocess.Popen(executecmd, cwd=dir, env=None)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD5Click(self, event, dir=None):
         cmd = settings.load_command('CMD5')
@@ -108,8 +116,10 @@ class WorkDirFrame(gui.MainFrame):
         if cmd['use_env']:
             # extend the environment with the additional environment variables
             additionalenv = settings.load_env_vars()
-            for key in additionalenv:
-                env[key] = additionalenv[key]
+            for customenv in additionalenv:
+                key = customenv.split('=')[0]
+                value = customenv.split('=')[1]
+                env[key] = value
 
         if cmd['confirmation']:
             dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
@@ -117,7 +127,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        subprocess.Popen(executecmd, cwd=dir, env=None)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD6Click(self, event, dir=None):
         cmd = settings.load_command('CMD6')
@@ -128,8 +138,10 @@ class WorkDirFrame(gui.MainFrame):
         if cmd['use_env']:
             # extend the environment with the additional environment variables
             additionalenv = settings.load_env_vars()
-            for key in additionalenv:
-                env[key] = additionalenv[key]
+            for customenv in additionalenv:
+                key = customenv.split('=')[0]
+                value = customenv.split('=')[1]
+                env[key] = value
 
         if cmd['confirmation']:
             dlg = wx.MessageDialog(self, 'Execute command: ' + executecmd, 'Confirmation', wx.YES_NO | wx.ICON_QUESTION)
@@ -137,7 +149,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        subprocess.Popen(executecmd, cwd=dir, env=None)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def workdirClose(self, event):
         self.Close()
