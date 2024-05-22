@@ -4,7 +4,7 @@ import gui
 # import workdir specific libraries
 import helper
 import webbrowser
-
+import icons
 
 class dialogAbout(gui.dialogAbout):
     # constructor
@@ -14,6 +14,9 @@ class dialogAbout(gui.dialogAbout):
 
         self.staticTextName.SetLabelText(helper.NAME + ' ' + helper.VERSION)
         self.staticTextLicence.SetLabelText(self.staticTextLicence.GetLabelText() + ' ' + helper.LICENCE)
+        
+        # specify all the icons
+        gui.dialogAbout.SetIcon(self, icons.info.GetIcon())
 
     def openGithub(self, event):
         webbrowser.open_new_tab('https://github.com/dseichter/Workdir')  # Add the URL of the GitHub repository
