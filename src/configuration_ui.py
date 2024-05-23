@@ -13,7 +13,7 @@ class dialogConfiguration(gui.dialogConfiguration):
     def __init__(self, parent):
         # initialize parent class
         gui.dialogConfiguration.__init__(self, parent)
-        
+
         # specify all the icons
         gui.dialogAbout.SetIcon(self, icons.settings.GetIcon())
 

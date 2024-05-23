@@ -19,7 +19,7 @@ class WorkDirFrame(gui.MainFrame):
     def __init__(self, parent):
         # initialize parent class
         gui.MainFrame.__init__(self, parent)
-        
+
         # specify all the icons
         gui.MainFrame.SetIcon(self, icons.opened_folders.GetIcon())
         self.menuitemFileClose.SetBitmap(icons.cancel.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
