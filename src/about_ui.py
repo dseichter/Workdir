@@ -20,3 +20,6 @@ class dialogAbout(gui.dialogAbout):
 
     def openGithub(self, event):
         webbrowser.open_new_tab('https://github.com/dseichter/Workdir')  # Add the URL of the GitHub repository
+        
+    def openIcons8(self, event):
+        webbrowser.open_new_tab('https://icons8.com/')

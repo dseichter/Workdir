@@ -324,6 +324,12 @@ class dialogAbout(wx.Dialog):
         self.staticTextGithub.SetForegroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHT))
 
         bSizer2.Add(self.staticTextGithub, 0, wx.ALL, 5)
+        self.staticTextIcon8 = wx.StaticText(self, wx.ID_ANY, u"Icons by Icons8.com", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.staticTextIcon8.Wrap(-1)
+
+        self.staticTextIcon8.SetForegroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_GRAYTEXT))
+
+        bSizer2.Add(self.staticTextIcon8, 0, wx.ALL, 5)
         m_sdbSizer2 = wx.StdDialogButtonSizer()
         self.m_sdbSizer2OK = wx.Button(self, wx.ID_OK)
         m_sdbSizer2.AddButton(self.m_sdbSizer2OK)
@@ -338,10 +344,14 @@ class dialogAbout(wx.Dialog):
 
         # Connect Events
         self.staticTextGithub.Bind(wx.EVT_LEFT_DOWN, self.openGithub)
+        self.staticTextIcon8.Bind(wx.EVT_LEFT_DOWN, self.openIcons8)
 
     def __del__(self):
         pass
     # Virtual event handlers, override them in your derived class
 
     def openGithub(self, event):
+        event.Skip()
+
+    def openIcons8(self, event):
         event.Skip()
