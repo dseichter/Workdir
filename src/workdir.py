@@ -258,7 +258,9 @@ class WorkDirFrame(gui.MainFrame):
 
     def miHelpUpdate(self, event):
         if helper.check_for_new_release():
-            wx.MessageBox('A new release is available.', 'Update available', wx.OK | wx.ICON_INFORMATION)
+            result = wx.MessageBox('A new release is available.\nWould you like to open the download page?', 'Update available', wx.YES_NO | wx.ICON_INFORMATION)
+            if result == wx.YES:
+                webbrowser.open_new_tab(helper.RELEASES)
         else:
             wx.MessageBox('No new release available.', 'No update', wx.OK | wx.ICON_INFORMATION)
 
