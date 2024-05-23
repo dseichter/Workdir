@@ -3,7 +3,8 @@ import json
 import logging
 
 VERSION = "v2024-05-23"
-URL = 'https://api.github.com/repos/dseichter/Workdir/releases/latest'
+UPDATEURL = 'https://api.github.com/repos/dseichter/Workdir/releases/latest'
+RELEASES = 'https://github.com/dseichter/Workdir/releases'
 NAME = 'Workdir'
 LICENCE = 'GPL-3.0'
 
@@ -11,7 +12,7 @@ LICENCE = 'GPL-3.0'
 def check_for_new_release():
     try:
         http = urllib3.PoolManager()
-        r = http.request('GET', URL)
+        r = http.request('GET', UPDATEURL)
         data = json.loads(r.data.decode('utf-8'))
         latest_version = data['tag_name']
         return latest_version != VERSION
