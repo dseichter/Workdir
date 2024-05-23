@@ -2,7 +2,7 @@ import urllib3
 import json
 import logging
 
-VERSION = "v2024-05-22"
+VERSION = "v2024-05-23"
 URL = 'https://api.github.com/repos/dseichter/Workdir/releases/latest'
 NAME = 'Workdir'
 LICENCE = 'GPL-3.0'
