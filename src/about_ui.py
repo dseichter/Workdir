@@ -17,6 +17,8 @@ class dialogAbout(gui.dialogAbout):
         
         # specify all the icons
         gui.dialogAbout.SetIcon(self, icons.info.GetIcon())
+        self.bitmapLogo.SetBitmap(icons.opened_folders.GetBitmap())
+        self.Fit()
 
     def openGithub(self, event):
         webbrowser.open_new_tab('https://github.com/dseichter/Workdir')  # Add the URL of the GitHub repository
