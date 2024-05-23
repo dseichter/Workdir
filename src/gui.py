@@ -43,13 +43,13 @@ class MainFrame(wx.Frame):
         self.m_menubar1.Append(self.menuItemExtras, u"Extras")
 
         self.menuitemHelp = wx.Menu()
-        self.getHelp = wx.MenuItem(self.menuitemHelp, ID_GET_HELP, u"Get help...", wx.EmptyString, wx.ITEM_NORMAL)
-        self.menuitemHelp.Append(self.getHelp)
+        self.menuitemHelpSupport = wx.MenuItem(self.menuitemHelp, ID_GET_HELP, u"Support...", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuitemHelp.Append(self.menuitemHelpSupport)
 
-        self.checkForUpdates = wx.MenuItem(self.menuitemHelp, ID_CHECK_FOR_UPDATES, u"Check for updates", wx.EmptyString, wx.ITEM_NORMAL)
-        self.menuitemHelp.Append(self.checkForUpdates)
+        self.menuitemHelpUpdate = wx.MenuItem(self.menuitemHelp, ID_CHECK_FOR_UPDATES, u"Check for updates", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuitemHelp.Append(self.menuitemHelpUpdate)
 
-        self.menuitemHelpAbout = wx.MenuItem(self.menuitemHelp, ID_ABOUT, u"About", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuitemHelpAbout = wx.MenuItem(self.menuitemHelp, ID_ABOUT, u"About...", wx.EmptyString, wx.ITEM_NORMAL)
         self.menuitemHelp.Append(self.menuitemHelpAbout)
 
         self.m_menubar1.Append(self.menuitemHelp, u"Help")
@@ -63,8 +63,8 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_SHOW, self.workdirShow)
         self.Bind(wx.EVT_MENU, self.miFileClose, id=self.menuitemFileClose.GetId())
         self.Bind(wx.EVT_MENU, self.miExtrasConfiguration, id=self.menuitemExtrasConfiguration.GetId())
-        self.Bind(wx.EVT_MENU, self.miHelpSupport, id=self.getHelp.GetId())
-        self.Bind(wx.EVT_MENU, self.miHelpUpdate, id=self.checkForUpdates.GetId())
+        self.Bind(wx.EVT_MENU, self.miHelpSupport, id=self.menuitemHelpSupport.GetId())
+        self.Bind(wx.EVT_MENU, self.miHelpUpdate, id=self.menuitemHelpUpdate.GetId())
         self.Bind(wx.EVT_MENU, self.miHelpAbout, id=self.menuitemHelpAbout.GetId())
 
     def __del__(self):
@@ -324,6 +324,12 @@ class dialogAbout(wx.Dialog):
         self.staticTextGithub.SetForegroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHT))
 
         bSizer2.Add(self.staticTextGithub, 0, wx.ALL, 5)
+        self.staticTextIcon8 = wx.StaticText(self, wx.ID_ANY, u"Icons by Icons8.com", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.staticTextIcon8.Wrap(-1)
+
+        self.staticTextIcon8.SetForegroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_GRAYTEXT))
+
+        bSizer2.Add(self.staticTextIcon8, 0, wx.ALL, 5)
         m_sdbSizer2 = wx.StdDialogButtonSizer()
         self.m_sdbSizer2OK = wx.Button(self, wx.ID_OK)
         m_sdbSizer2.AddButton(self.m_sdbSizer2OK)
@@ -338,10 +344,14 @@ class dialogAbout(wx.Dialog):
 
         # Connect Events
         self.staticTextGithub.Bind(wx.EVT_LEFT_DOWN, self.openGithub)
+        self.staticTextIcon8.Bind(wx.EVT_LEFT_DOWN, self.openIcons8)
 
     def __del__(self):
         pass
     # Virtual event handlers, override them in your derived class
 
     def openGithub(self, event):
+        event.Skip()
+
+    def openIcons8(self, event):
         event.Skip()

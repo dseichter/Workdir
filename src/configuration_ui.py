@@ -5,6 +5,7 @@ import gui
 
 # import workdir specific libraries
 import settings
+import icons
 
 
 class dialogConfiguration(gui.dialogConfiguration):
@@ -12,6 +13,9 @@ class dialogConfiguration(gui.dialogConfiguration):
     def __init__(self, parent):
         # initialize parent class
         gui.dialogConfiguration.__init__(self, parent)
+
+        # specify all the icons
+        gui.dialogAbout.SetIcon(self, icons.settings.GetIcon())
 
     def configurationShow(self, event):
 
