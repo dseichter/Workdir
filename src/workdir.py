@@ -21,7 +21,7 @@ class WorkDirFrame(gui.MainFrame):
         gui.MainFrame.__init__(self, parent)
 
         # specify all the icons
-        gui.MainFrame.SetIcon(self, icons.opened_folders.GetIcon())
+        gui.MainFrame.SetIcon(self, icons.opened_folder.GetIcon())
         self.menuitemFileClose.SetBitmap(icons.cancel.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
         self.menuitemExtrasConfiguration.SetBitmap(icons.settings.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
         self.menuitemHelpSupport.SetBitmap(icons.get_help.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
