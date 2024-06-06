@@ -7,7 +7,7 @@ import webbrowser
 import icons
 
 
-class dialogAbout(gui.dialogAbout):
+class DialogAbout(gui.dialogAbout):
     # constructor
     def __init__(self, parent):
         # initialize parent class

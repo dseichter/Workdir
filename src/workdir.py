@@ -252,13 +252,13 @@ class WorkDirFrame(gui.MainFrame):
 
     def miExtrasConfiguration(self, event):
         # open the configuration dialog
-        dlg = configuration_ui.dialogConfiguration(self)
+        dlg = configuration_ui.DialogConfiguration(self)
         dlg.ShowModal()
         dlg.Destroy()
 
     def miHelpAbout(self, event):
         # open the about dialog
-        dlg = about_ui.dialogAbout(self)
+        dlg = about_ui.DialogAbout(self)
         dlg.ShowModal()
         dlg.Destroy()
 
