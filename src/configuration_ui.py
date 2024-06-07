@@ -8,7 +8,7 @@ import settings
 import icons
 
 
-class dialogConfiguration(gui.dialogConfiguration):
+class DialogConfiguration(gui.dialogConfiguration):
     # constructor
     def __init__(self, parent):
         # initialize parent class

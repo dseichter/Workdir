@@ -21,7 +21,7 @@ class WorkDirFrame(gui.MainFrame):
         gui.MainFrame.__init__(self, parent)
 
         # specify all the icons
-        gui.MainFrame.SetIcon(self, icons.opened_folders.GetIcon())
+        gui.MainFrame.SetIcon(self, icons.opened_folder.GetIcon())
         self.menuitemFileClose.SetBitmap(icons.cancel.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
         self.menuitemExtrasConfiguration.SetBitmap(icons.settings.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
         self.menuitemHelpSupport.SetBitmap(icons.get_help.GetBitmap().ConvertToImage().Rescale(16, 16).ConvertToBitmap())
@@ -252,13 +252,13 @@ class WorkDirFrame(gui.MainFrame):
 
     def miExtrasConfiguration(self, event):
         # open the configuration dialog
-        dlg = configuration_ui.dialogConfiguration(self)
+        dlg = configuration_ui.DialogConfiguration(self)
         dlg.ShowModal()
         dlg.Destroy()
 
     def miHelpAbout(self, event):
         # open the about dialog
-        dlg = about_ui.dialogAbout(self)
+        dlg = about_ui.DialogAbout(self)
         dlg.ShowModal()
         dlg.Destroy()
 

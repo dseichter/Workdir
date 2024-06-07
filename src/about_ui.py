@@ -7,7 +7,7 @@ import webbrowser
 import icons
 
 
-class dialogAbout(gui.dialogAbout):
+class DialogAbout(gui.dialogAbout):
     # constructor
     def __init__(self, parent):
         # initialize parent class
@@ -18,7 +18,7 @@ class dialogAbout(gui.dialogAbout):
 
         # specify all the icons
         gui.dialogAbout.SetIcon(self, icons.info.GetIcon())
-        self.bitmapLogo.SetBitmap(icons.opened_folders.GetBitmap())
+        self.bitmapLogo.SetBitmap(icons.opened_folder.GetBitmap())
         self.Fit()
 
     def openGithub(self, event):
