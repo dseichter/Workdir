@@ -1,7 +1,7 @@
 import json
 
+CONFIGFILE = 'config.json'
 
-CONFIGFILE='config.json'
 
 def create_config():
     with open(CONFIGFILE, 'r') as f:
