@@ -13,7 +13,7 @@ def create_config():
             f.write('{}')
 
     with open(CONFIGFILE, 'r') as f:
-        data = json.load(f)        
+        data = json.load(f)
 
     if 'directories' not in data:
         data['directories'] = []
