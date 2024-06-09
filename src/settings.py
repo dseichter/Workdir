@@ -11,7 +11,9 @@ def create_config():
     except FileNotFoundError:
         with open(CONFIGFILE, 'w') as f:
             f.write('{}')
-        data = {}
+
+    with open(CONFIGFILE, 'r') as f:
+        data = json.load(f)        
 
     if 'directories' not in data:
         data['directories'] = []
