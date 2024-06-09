@@ -35,6 +35,10 @@ I am asked from time to time if I would like to offer more than six commands. Th
 
 Workdir can be used multiple times. Create a subfolder each time, which you name “Development” or “Projects”, for example. Copy the application file into these directories. When you start the program, it will check if there is already a configuration there (if not, the program will create it automatically). Now you can define different commands, independent of the category. For example, the opening or updating (git pull) of directories with source code. Or automatic generation of thumbnails or conversion of file formats. The variety knows no limits. Workdir supports you in meeting these requirements as well.
 
+## Known Issues
+
+If you run workdir the first time, the window can be really small. The size will be auto adjusted based on your directories. So please proceed by adding your directories.
+
 # Contributing 
 
 If you want to contribute by fixing an issue, add a new function or just optimize something, a simple instruction how to start development.
