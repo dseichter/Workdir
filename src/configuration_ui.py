@@ -152,3 +152,5 @@ class DialogConfiguration(gui.dialogConfiguration):
         cmd6['confirmation'] = self.checkBoxEnvVarCMD6.GetValue()
         cmd6['colour'] = self.colourPickerCMD6.GetColour().GetAsString(wx.C2S_HTML_SYNTAX)
         settings.save_command('CMD6', cmd6)
+
+        self.Close()

@@ -4,8 +4,14 @@ CONFIGFILE = 'config.json'
 
 
 def create_config():
-    with open(CONFIGFILE, 'r') as f:
-        data = json.load(f)
+    # create the config file if it does not exist
+    try:
+        with open(CONFIGFILE, 'r') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        with open(CONFIGFILE, 'w') as f:
+            f.write('{}')
+        data = {}
 
     if 'directories' not in data:
         data['directories'] = []
@@ -16,9 +22,9 @@ def create_config():
     for cmd in ['CMD1', 'CMD2', 'CMD3', 'CMD4', 'CMD5', 'CMD6']:
         if cmd not in data:
             data[cmd] = {}
-            data[cmd]['label'] = ''
-            data[cmd]['command'] = ''
-            data[cmd]['parameters'] = ''
+            data[cmd]['label'] = 'CMD' if cmd == 'CMD1' else ''
+            data[cmd]['command'] = 'cmd' if cmd == 'CMD1' else ''
+            data[cmd]['parameters'] = '/k "cd {directory}"' if cmd == 'CMD1' else ''
             data[cmd]['use_env'] = False
             data[cmd]['confirmation'] = False
             data[cmd]['colour'] = '#000000'
@@ -64,6 +70,9 @@ def save_directories(directories):
     with open(CONFIGFILE, 'r') as f:
         data = json.load(f)
 
+    # remove empty directories
+    directories = [d for d in directories if d != '']
+
     data['directories'] = directories
 
     with open(CONFIGFILE, 'w') as f:
@@ -74,6 +83,9 @@ def save_directories(directories):
 def save_env_vars(env):
     with open(CONFIGFILE, 'r') as f:
         data = json.load(f)
+
+    # remove empty env vars
+    env = [e for e in env if e != '']
 
     data['env'] = env
 
