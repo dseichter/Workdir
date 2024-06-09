@@ -70,6 +70,9 @@ def save_directories(directories):
     with open(CONFIGFILE, 'r') as f:
         data = json.load(f)
 
+    # remove empty directories
+    directories = [d for d in directories if d != '']
+
     data['directories'] = directories
 
     with open(CONFIGFILE, 'w') as f:
@@ -80,6 +83,9 @@ def save_directories(directories):
 def save_env_vars(env):
     with open(CONFIGFILE, 'r') as f:
         data = json.load(f)
+
+    # remove empty env vars
+    env = [e for e in env if e != '']
 
     data['env'] = env
 
