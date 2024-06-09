@@ -255,6 +255,7 @@ class WorkDirFrame(gui.MainFrame):
         dlg = configuration_ui.DialogConfiguration(self)
         dlg.ShowModal()
         dlg.Destroy()
+        self.workdirShow(event)
 
     def miHelpAbout(self, event):
         # open the about dialog
