@@ -2,10 +2,11 @@
 
 Working with multiple directories and execute commands without navigate to them with **Workdir**.
 
-## Badges
-
 ![pep8](https://github.com/dseichter/Workdir/actions/workflows/pep8.yml/badge.svg)
 ![trivy](https://github.com/dseichter/Workdir/actions/workflows/trivy.yml/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dseichter_Workdir&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dseichter_Workdir)
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=dseichter_Workdir)
 
 ## About 
 
