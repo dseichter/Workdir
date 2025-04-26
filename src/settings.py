@@ -14,6 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import json
+import os
 
 CONFIGFILE = 'config.json'
 
@@ -30,8 +31,8 @@ def create_config():
     with open(CONFIGFILE, 'r') as f:
         data = json.load(f)
 
-    if 'directories' not in data:
-        data['directories'] = []
+    if 'directories' not in data or len(data['directories']) == 0:
+        data['directories'] = [os.path.expanduser("~")]
 
     if 'env' not in data:
         data['env'] = []
