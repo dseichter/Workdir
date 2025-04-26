@@ -62,10 +62,7 @@ class WorkDirFrame(gui.MainFrame):
             result = dlg.ShowModal()
             if result == wx.ID_NO:
                 return
-
-        result = subprocess.run(executecmd, cwd=dir, env=env, shell=True, text=True, capture_output=True)
-        if result.returncode != 0:
-            wx.MessageBox(f"Command failed with error:\n{result.stderr}", "Error", wx.OK | wx.ICON_ERROR)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD2Click(self, event, dir=None):
         cmd = settings.load_command('CMD2')
@@ -87,9 +84,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        result = subprocess.run(executecmd, cwd=dir, env=env, shell=True, text=True, capture_output=True)
-        if result.returncode != 0:
-            wx.MessageBox(f"Command failed with error:\n{result.stderr}", "Error", wx.OK | wx.ICON_ERROR)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD3Click(self, event, dir=None):
         cmd = settings.load_command('CMD3')
@@ -111,9 +106,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        result = subprocess.run(executecmd, cwd=dir, env=env, shell=True, text=True, capture_output=True)
-        if result.returncode != 0:
-            wx.MessageBox(f"Command failed with error:\n{result.stderr}", "Error", wx.OK | wx.ICON_ERROR)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD4Click(self, event, dir=None):
         cmd = settings.load_command('CMD4')
@@ -135,9 +128,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        result = subprocess.run(executecmd, cwd=dir, env=env, shell=True, text=True, capture_output=True)
-        if result.returncode != 0:
-            wx.MessageBox(f"Command failed with error:\n{result.stderr}", "Error", wx.OK | wx.ICON_ERROR)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD5Click(self, event, dir=None):
         cmd = settings.load_command('CMD5')
@@ -159,9 +150,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        result = subprocess.run(executecmd, cwd=dir, env=env, shell=True, text=True, capture_output=True)
-        if result.returncode != 0:
-            wx.MessageBox(f"Command failed with error:\n{result.stderr}", "Error", wx.OK | wx.ICON_ERROR)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def newbuttonCMD6Click(self, event, dir=None):
         cmd = settings.load_command('CMD6')
@@ -183,12 +172,7 @@ class WorkDirFrame(gui.MainFrame):
             if result == wx.ID_NO:
                 return
 
-        result = subprocess.run(executecmd, cwd=dir, env=env, shell=True, text=True, capture_output=True)
-        if result.returncode != 0:
-            wx.MessageBox(f"Command failed with error:\n{result.stderr}", "Error", wx.OK | wx.ICON_ERROR)
-
-    def workdirClose(self, event):
-        exit(0)
+        subprocess.Popen(executecmd, cwd=dir, env=env)
 
     def workdirShow(self, event):
         # check if config.json exists, if not create it, if available, update it
@@ -276,6 +260,7 @@ class WorkDirFrame(gui.MainFrame):
 
     def miFileClose(self, event):
         self.Close()
+        wx.Exit()
 
     def miExtrasConfiguration(self, event):
         # open the configuration dialog

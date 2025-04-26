@@ -17,7 +17,7 @@ import urllib3
 import json
 import logging
 
-VERSION = "v2024-07-07"
+VERSION = "v2025-04-26"
 UPDATEURL = 'https://api.github.com/repos/dseichter/Workdir/releases/latest'
 RELEASES = 'https://github.com/dseichter/Workdir/releases'
 NAME = 'Workdir'
