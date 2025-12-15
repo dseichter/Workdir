@@ -50,10 +50,28 @@ Create and activate an environment by running the following command:
 
 ```python -m venv .venv```
 
+**On Windows:**
 ```.venv/Scripts/activate```
+
+**On Linux/macOS:**
+```source .venv/bin/activate```
 
 Install the required dependencies
 
+**For wxPython version:**
 ```pip install -r src/requirements.txt```
 
-If you want to do some UI changes, download and install the latest wxFormBuilder from the [wxFormBuilder Homepage](https://github.com/wxFormBuilder/wxFormBuilder).
+**For PySide6 version:**
+```pip install -r src/requirements_pyside6.txt```
+
+## Migration to PySide6
+
+The project has been migrated from wxPython to PySide6. The PySide6 version provides the same functionality with a modern Qt-based interface.
+
+**Running the PySide6 version:**
+```python src/workdir_pyside6.py```
+
+**Running the original wxPython version:**
+```python src/workdir.py```
+
+If you want to do some UI changes, download and install the latest wxFormBuilder from the [wxFormBuilder Homepage](https://github.com/wxFormBuilder/wxFormBuilder) for the wxPython version, or use Qt Designer for the PySide6 version.
