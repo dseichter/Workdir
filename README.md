@@ -2,11 +2,28 @@
 
 Working with multiple directories and execute commands without navigate to them with **Workdir**.
 
-![pep8](https://github.com/dseichter/Workdir/actions/workflows/pep8.yml/badge.svg)
+<p align="center">
+  <img src="icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png" alt="Workdir Logo"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/dseichter/Workdir?style=flat-square" alt="Release">
+  <img src="https://img.shields.io/github/downloads/dseichter/Workdir/total?style=flat-square" alt="Downloads">
+  <img src="https://img.shields.io/github/license/dseichter/Workdir?style=flat-square" alt="License">
+</p>
+
+<p align="center">
+  <b><a href="https://dseichter.github.io/Workdir/">Documentation</a></b> •
+  <b><a href="https://github.com/dseichter/Workdir/releases">Downloads</a></b> •
+  <b><a href="https://github.com/dseichter/Workdir/issues">Issues</a></b>
+</p>
+
+![ruff](https://github.com/dseichter/Workdir/actions/workflows/ruff.yml/badge.svg)
+![bandit](https://github.com/dseichter/Workdir/actions/workflows/bandit.yml/badge.svg)
 ![trivy](https://github.com/dseichter/Workdir/actions/workflows/trivy.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dseichter_Workdir&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dseichter_Workdir)
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=dseichter_Workdir)
+---
 
 ## About 
 
