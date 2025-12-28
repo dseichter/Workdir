@@ -24,6 +24,7 @@ Working with multiple directories and execute commands without navigate to them 
 <img src="https://github.com/dseichter/Workdir/actions/workflows/trivy.yml/badge.svg" alt="trivy">
 <a href="https://sonarcloud.io/summary/new_code?id=dseichter_Workdir"><img src="https://sonarcloud.io/api/project_badges/measure?project=dseichter_Workdir&metric=alert_status" alt="Quality Gate Status"></a>
 </p>
+
 ---
 
 ## About 
