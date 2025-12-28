@@ -13,7 +13,6 @@ Working with multiple directories and execute commands without navigate to them 
 </p>
 
 <p align="center">
-  <b><a href="https://dseichter.github.io/Workdir/">Documentation</a></b> •
   <b><a href="https://github.com/dseichter/Workdir/releases">Downloads</a></b> •
   <b><a href="https://github.com/dseichter/Workdir/issues">Issues</a></b>
 </p>
