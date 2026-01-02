@@ -6,10 +6,6 @@
 from PySide6.QtWidgets import QMainWindow, QAction, QWidget, QDialog, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QCheckBox, QPushButton, QTextEdit, QDialogButtonBox
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QColorDialog, QColor
-ID_CONFIGURATION = 6001
-ID_GET_HELP = 6002
-ID_CHECK_FOR_UPDATES = 6003
-ID_ABOUT = 6004
 
 ###########################################################################
 ## Class MainFrame
