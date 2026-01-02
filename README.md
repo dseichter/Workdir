@@ -76,20 +76,16 @@ Create and activate an environment by running the following command:
 
 Install the required dependencies
 
-**For wxPython version:**
 ```pip install -r src/requirements.txt```
 
-**For PySide6 version:**
-```pip install -r src/requirements_pyside6.txt```
-
-## Migration to PySide6
-
-The project has been migrated from wxPython to PySide6. The PySide6 version provides the same functionality with a modern Qt-based interface.
-
-**Running the PySide6 version:**
-```python src/workdir_pyside6.py```
-
-**Running the original wxPython version:**
+To run the application:
 ```python src/workdir.py```
 
-If you want to do some UI changes, download and install the latest wxFormBuilder from the [wxFormBuilder Homepage](https://github.com/wxFormBuilder/wxFormBuilder) for the wxPython version, or use Qt Designer for the PySide6 version.
+## 📄 License
+
+GPL 3.0 — see [LICENSE](LICENSE) file at the root of the repository for details.
+
+## Icons
+ 
+RunIfExists uses [Google Material Symbols](https://fonts.google.com/icons) within its code for UI icons.  
+Material Symbols are licensed under the [Apache License 2.0](https://github.com/google/material-design-icons/blob/master/LICENSE) and are free for use in open source projects.

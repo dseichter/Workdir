@@ -3,13 +3,9 @@
 ###########################################################################
 ## Python code migrated from wxPython to PySide6
 ## Original generated with wxFormBuilder (version 4.2.1-0-g80c4cb6)
-###########################################################################
-
-from PySide6.QtWidgets import *
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-
-ID_CLOSE = 6000
+from PySide6.QtWidgets import QMainWindow, QAction, QWidget, QDialog, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QCheckBox, QPushButton, QTextEdit, QDialogButtonBox
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QColorDialog, QColor
 ID_CONFIGURATION = 6001
 ID_GET_HELP = 6002
 ID_CHECK_FOR_UPDATES = 6003

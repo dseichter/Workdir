@@ -1,8 +1,5 @@
 # Copyright (c) 2024 Daniel Seichter
 
-from PySide6.QtWidgets import QColorDialog
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QColor
 import gui
 import settings
 import icons
