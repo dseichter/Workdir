@@ -28,7 +28,7 @@ jobs:
             run: pip install -r src/requirements.txt
 
           - name: Build Windows binary
-            run: pyinstaller --onefile -w src/workdir.py -n workdir-windows-${{ github.ref_name }}.exe --icon=icons/Opened_Folder.ico
+            run: pyinstaller --onefile -w src/workdir.py -n workdir-windows-${{ github.ref_name }}.exe --icon=icons/workdir.ico
 
           - name: Upload artifact
             uses: actions/upload-artifact@v5
@@ -60,7 +60,7 @@ jobs:
             run: pip install -r src/requirements.txt
 
           - name: Build Linux binary
-            run: pyinstaller --onefile src/workdir.py -n workdir-linux-${{ github.ref_name }} --icon=icons/Opened_Folder.ico
+            run: pyinstaller --onefile src/workdir.py -n workdir-linux-${{ github.ref_name }} --icon=icons/workdir.ico
 
           - name: Upload artifact
             uses: actions/upload-artifact@v5
