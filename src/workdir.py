@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QGridLayout, QLabel, QPushB
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QIcon
 import webbrowser
-import subprocess
+import subprocess  # nosec B404
 import os
 
 import gui
@@ -53,7 +53,8 @@ class WorkDirFrame(gui.MainFrame):
             if reply == QMessageBox.No:
                 return
         
-        subprocess.Popen(executecmd, cwd=directory, env=env, shell=True)
+        # We need shell=True, to be able run everything!
+        subprocess.Popen(executecmd, cwd=directory, env=env, shell=True) # nosec B602
 
     def workdirShow(self):
         settings.create_config()
