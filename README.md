@@ -2,11 +2,29 @@
 
 Working with multiple directories and execute commands without navigate to them with **Workdir**.
 
-![pep8](https://github.com/dseichter/Workdir/actions/workflows/pep8.yml/badge.svg)
-![trivy](https://github.com/dseichter/Workdir/actions/workflows/trivy.yml/badge.svg)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dseichter_Workdir&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dseichter_Workdir)
+<p align="center">
+  <img src="icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png" alt="Workdir Logo"/>
+</p>
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=dseichter_Workdir)
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/dseichter/Workdir?style=flat-square" alt="Release">
+  <img src="https://img.shields.io/github/downloads/dseichter/Workdir/total?style=flat-square" alt="Downloads">
+  <img src="https://img.shields.io/github/license/dseichter/Workdir?style=flat-square" alt="License">
+</p>
+
+<p align="center">
+  <b><a href="https://github.com/dseichter/Workdir/releases">Downloads</a></b> •
+  <b><a href="https://github.com/dseichter/Workdir/issues">Issues</a></b>
+</p>
+
+<p align="center">
+<img src="https://github.com/dseichter/Workdir/actions/workflows/ruff.yml/badge.svg" alt="ruff">
+<img src="https://github.com/dseichter/Workdir/actions/workflows/bandit.yml/badge.svg" alt="bandit">
+<img src="https://github.com/dseichter/Workdir/actions/workflows/trivy.yml/badge.svg" alt="trivy">
+<a href="https://sonarcloud.io/summary/new_code?id=dseichter_Workdir"><img src="https://sonarcloud.io/api/project_badges/measure?project=dseichter_Workdir&metric=alert_status" alt="Quality Gate Status"></a>
+</p>
+
+---
 
 ## About 
 
@@ -50,10 +68,24 @@ Create and activate an environment by running the following command:
 
 ```python -m venv .venv```
 
+**On Windows:**
 ```.venv/Scripts/activate```
+
+**On Linux/macOS:**
+```source .venv/bin/activate```
 
 Install the required dependencies
 
 ```pip install -r src/requirements.txt```
 
-If you want to do some UI changes, download and install the latest wxFormBuilder from the [wxFormBuilder Homepage](https://github.com/wxFormBuilder/wxFormBuilder).
+To run the application:
+```python src/workdir.py```
+
+## 📄 License
+
+GPL 3.0 — see [LICENSE](LICENSE) file at the root of the repository for details.
+
+## Icons
+ 
+RunIfExists uses [Google Material Symbols](https://fonts.google.com/icons) within its code for UI icons.  
+Material Symbols are licensed under the [Apache License 2.0](https://github.com/google/material-design-icons/blob/master/LICENSE) and are free for use in open source projects.

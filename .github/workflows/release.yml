@@ -28,7 +28,7 @@ jobs:
             run: pip install -r src/requirements.txt
 
           - name: Build Windows binary
-            run: pyinstaller --onefile -w src/workdir.py -n workdir-windows-${{ github.ref_name }}.exe --icon=icons/Opened_Folder.ico
+            run: pyinstaller --onefile -w src/workdir.py -n workdir-windows-${{ github.ref_name }}.exe --icon=icons/workdir.ico
 
           - name: Upload artifact
             uses: actions/upload-artifact@v6
@@ -44,7 +44,7 @@ jobs:
             uses: actions/checkout@v6
 
           - name: Install dependencies
-            run: sudo apt-get install build-essential libgtk-3-dev
+            run: sudo apt-get update && sudo apt-get install build-essential libgtk-3-dev
 
           - name: Set up Python
             uses: actions/setup-python@v6
@@ -60,7 +60,7 @@ jobs:
             run: pip install -r src/requirements.txt
 
           - name: Build Linux binary
-            run: pyinstaller --onefile src/workdir.py -n workdir-linux-${{ github.ref_name }} --icon=icons/Opened_Folder.ico
+            run: pyinstaller --onefile src/workdir.py -n workdir-linux-${{ github.ref_name }} --icon=icons/workdir.ico
 
           - name: Upload artifact
             uses: actions/upload-artifact@v6
@@ -87,7 +87,7 @@ jobs:
             tag_name: ${{ github.ref_name }}
             name: Release ${{ github.ref_name }}
             draft: false
-            prerelease: false
+            prerelease: ${{ contains(github.ref_name, 'rc') || contains(github.ref_name, 'beta') }}
             generate_release_notes: true
             files: |
               workdir-linux-${{ github.ref_name }}
