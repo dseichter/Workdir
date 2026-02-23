@@ -3,9 +3,9 @@
 ###########################################################################
 ## Python code migrated from wxPython to PySide6
 ## Original generated with wxFormBuilder (version 4.2.1-0-g80c4cb6)
-from PySide6.QtWidgets import QMainWindow, QAction, QWidget, QDialog, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QCheckBox, QPushButton, QTextEdit, QDialogButtonBox
+from PySide6.QtWidgets import QMainWindow, QWidget, QDialog, QColorDialog, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QCheckBox, QPushButton, QTextEdit, QDialogButtonBox
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QColorDialog, QColor
+from PySide6.QtGui import QAction, QColor
 
 ###########################################################################
 ## Class MainFrame
