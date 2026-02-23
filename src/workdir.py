@@ -64,6 +64,7 @@ class WorkDirFrame(gui.MainFrame):
         widget = QWidget()
         self.setCentralWidget(widget)
         layout = QGridLayout(widget)
+        self.adjustSize()
         
         for row, directory in enumerate(directories):
             # Directory label
