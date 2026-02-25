@@ -7,15 +7,19 @@ import icons
 
 
 class DialogAbout(gui.DialogAbout):
-    def __init__(self, parent=None):
+    def __init__(self, parent: object = None) -> None:
+        """
+        Initialize the About dialog.
+        """
         super().__init__(parent)
-        
         self.name_label.setText(f"{helper.NAME} {helper.VERSION}")
         self.licence_label.setText(f"Licenced under {helper.LICENCE}")
-        
         self.setWindowIcon(icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48'))
         pixmap = icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48').pixmap(48, 48)
         self.logo_label.setPixmap(pixmap)
 
-    def openGithub(self, event):
+    def openGithub(self, event: object) -> None:
+        """
+        Open the GitHub page for Workdir.
+        """
         webbrowser.open_new_tab('https://github.com/dseichter/Workdir')

@@ -137,37 +137,42 @@ class DialogConfiguration(QDialog):
                 'color_value': '#000000'
             }
             
-            # Connect color button
-            color_button.clicked.connect(lambda checked, cmd=cmd_name: self.choose_color(cmd))
-        
+            # Connect color button using signal/slot
+            color_button.clicked.connect(self._make_color_slot(cmd_name))
+
         layout.addWidget(commands_widget)
-        
+
         # Directories and Environment Variables panel
         dirs_env_widget = QWidget()
         dirs_env_layout = QGridLayout(dirs_env_widget)
-        
+
         dirs_env_layout.addWidget(QLabel("Directories"), 0, 0)
         dirs_env_layout.addWidget(QLabel("Environment Variables"), 0, 1)
-        
+
         self.directories_text = QTextEdit()
         self.env_vars_text = QTextEdit()
-        
+
         dirs_env_layout.addWidget(self.directories_text, 1, 0)
         dirs_env_layout.addWidget(self.env_vars_text, 1, 1)
-        
+
         dirs_env_layout.addWidget(QLabel("Add one directory each line. If a directory is not available, no commands will be enabled."), 2, 0)
         dirs_env_layout.addWidget(QLabel("Add one Key/Pair (Key=Value) in each line to provide as environment variable."), 2, 1)
-        
+
         layout.addWidget(dirs_env_widget)
-        
+
         # Buttons
         button_box = QDialogButtonBox(QDialogButtonBox.Save | QDialogButtonBox.Cancel)
         button_box.accepted.connect(self.configurationSave)
         button_box.rejected.connect(self.reject)
         layout.addWidget(button_box)
-        
+
         # Show configuration
         self.configurationShow()
+
+    def _make_color_slot(self, cmd_name: str):
+        def slot():
+            self.choose_color(cmd_name)
+        return slot
     
     def choose_color(self, cmd_name):
         color = QColorDialog.getColor(QColor(self.cmd_controls[cmd_name]['color_value']), self)

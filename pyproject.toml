@@ -4,20 +4,24 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Workdir"
-version = "0.1.0"
-description = "A modernized Python project structure for Workdir."
+version = "2026.1.2"
+description = "Work with multiple directories and run commands without navigating manually."
 readme = "README.md"
 authors = [
-    { name = "dseichter" }
+    { name = "Daniel Seichter" }
 ]
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent"
 ]
-dependencies = []
+dependencies = [
+    "PySide6>=6.10.2",
+    "urllib3>=2.6.3",
+    "packaging>=24.0"
+]
 
 [project.urls]
 Homepage = "https://github.com/dseichter/Workdir"
@@ -25,16 +29,16 @@ Documentation = "https://github.com/dseichter/Workdir"
 Repository = "https://github.com/dseichter/Workdir"
 
 [tool.setuptools]
-packages = ["src", "src.workdir", "src.workdir.dialogs"]
+py-modules = [
+    "about_ui",
+    "configuration_ui",
+    "gui",
+    "helper",
+    "icons",
+    "resources_rc",
+    "settings",
+    "workdir",
+]
 
-[tool.setuptools.package-data]
-"src.workdir" = ["*.py"]
-
-[tool.setuptools.exclude-package-data]
-"src.workdir" = ["__pycache__/*"]
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["src/requirements.txt"]}
-
-[tool.setuptools.dynamic.readme]
-file = "README.md"
+[tool.setuptools.package-dir]
+"" = "src"

@@ -5,18 +5,19 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
-import sys
-from PySide6.QtWidgets import QApplication, QWidget, QGridLayout, QLabel, QPushButton, QMessageBox
-import webbrowser
-import subprocess  # nosec B404
 import os
+import subprocess  # nosec B404
+import sys
+import webbrowser
 
-import gui
-import settings
-import configuration_ui
+from PySide6.QtWidgets import QApplication, QGridLayout, QLabel, QMessageBox, QPushButton, QWidget
+
 import about_ui
+import configuration_ui
+import gui
 import helper
 import icons
+import settings
 
 
 class WorkDirFrame(gui.MainFrame):

@@ -25,17 +25,34 @@ NAME = 'Workdir'
 LICENCE = 'GPL-3.0'
 
 
+def normalize_version_tag(tag: str) -> str:
+    normalized = tag.strip()
+    if normalized.lower().startswith('v'):
+        normalized = normalized[1:]
+    return normalized.replace('-', '.')
+
+
 def check_for_new_release():
     try:
         http = urllib3.PoolManager()
         r = http.request('GET', UPDATEURL)
-        releases = json.loads(r.data.decode('utf-8'))
-        # Find the latest stable (not prerelease) release
-        for release in releases:
-            if not release.get('prerelease', False):
-                latest_version = release.get('tag_name')
-                return version.parse(latest_version) > version.parse(VERSION)
-        return False  # No stable release found
+        release = json.loads(r.data.decode('utf-8'))
+
+        if isinstance(release, list):
+            latest_release = next((item for item in release if not item.get('prerelease', False)), None)
+        elif isinstance(release, dict):
+            latest_release = None if release.get('prerelease', False) else release
+        else:
+            return False
+
+        if latest_release is None:
+            return False
+
+        latest_version = latest_release.get('tag_name')
+        if not latest_version:
+            return False
+
+        return version.parse(normalize_version_tag(latest_version)) > version.parse(normalize_version_tag(VERSION))
     except Exception as e:
         logging.error(f"Error checking for new release: {e}")
         return False
