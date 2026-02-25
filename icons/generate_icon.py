@@ -5,8 +5,7 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
-import os
-import subprocess
+import sys
 from pathlib import Path
 
 from PIL import Image
@@ -48,20 +47,24 @@ def generate_qrc(icon_files: list[str]) -> None:
 
 def compile_qrc() -> None:
     """Compile src/resources.qrc to src/resources_rc.py."""
-    commands = [
-        ["pyside6-rcc", str(QRC_PATH), "-o", str(RESOURCE_MODULE_PATH)],
-        ["pyrcc6", str(QRC_PATH), "-o", str(RESOURCE_MODULE_PATH)],
-    ]
+    try:
+        from PySide6.scripts import pyside_tool
+    except ImportError as exc:
+        raise RuntimeError("Could not compile resources.qrc. Install PySide6 (pyside6-rcc).") from exc
 
-    for command in commands:
+    original_argv = sys.argv[:]
+    try:
+        sys.argv = ["pyside6-rcc", str(QRC_PATH), "-o", str(RESOURCE_MODULE_PATH)]
         try:
-            subprocess.run(command, check=True, capture_output=True, text=True)
-            print(f"✓ Compiled Qt resources via {command[0]}")
-            return
-        except (FileNotFoundError, subprocess.CalledProcessError):
-            continue
+            pyside_tool.rcc()
+        except SystemExit as exit_exc:
+            exit_code = exit_exc.code if isinstance(exit_exc.code, int) else 1
+            if exit_code != 0:
+                raise
+    finally:
+        sys.argv = original_argv
 
-    raise RuntimeError("Could not compile resources.qrc. Install PySide6 tools (pyside6-rcc/pyrcc6).")
+    print("✓ Compiled Qt resources via pyside6-rcc")
 
 
 def generate_icons_py(icon_files: list[str]) -> None:
