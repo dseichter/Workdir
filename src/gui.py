@@ -18,22 +18,22 @@ class MainFrame(QMainWindow):
         self.resize(660, 387)
         
         # Create menu bar
-        self.menubar = self.menuBar()
+        self.menu_bar = self.menuBar()
         
         # File menu
-        self.file_menu = self.menubar.addMenu("File")
+        self.file_menu = self.menu_bar.addMenu("File")
         self.close_action = QAction("Close", self)
         self.close_action.triggered.connect(self.miFileClose)
         self.file_menu.addAction(self.close_action)
         
         # Extras menu
-        self.extras_menu = self.menubar.addMenu("Extras")
+        self.extras_menu = self.menu_bar.addMenu("Extras")
         self.config_action = QAction("Configuration", self)
         self.config_action.triggered.connect(self.miExtrasConfiguration)
         self.extras_menu.addAction(self.config_action)
         
         # Help menu
-        self.help_menu = self.menubar.addMenu("Help")
+        self.help_menu = self.menu_bar.addMenu("Help")
         self.support_action = QAction("Support...", self)
         self.support_action.triggered.connect(self.miHelpSupport)
         self.help_menu.addAction(self.support_action)
@@ -58,25 +58,26 @@ class MainFrame(QMainWindow):
 
     # Virtual event handlers, override them in your derived class
     def workdirClose(self, event):
-        pass
+        if event is not None:
+            event.accept()
 
     def workdirShow(self):
-        pass
+        raise NotImplementedError("Derived class must implement workdirShow().")
 
     def miFileClose(self):
-        pass
+        raise NotImplementedError("Derived class must implement miFileClose().")
 
     def miExtrasConfiguration(self):
-        pass
+        raise NotImplementedError("Derived class must implement miExtrasConfiguration().")
 
     def miHelpSupport(self):
-        pass
+        raise NotImplementedError("Derived class must implement miHelpSupport().")
 
     def miHelpUpdate(self):
-        pass
+        raise NotImplementedError("Derived class must implement miHelpUpdate().")
 
     def miHelpAbout(self):
-        pass
+        raise NotImplementedError("Derived class must implement miHelpAbout().")
 
 
 ###########################################################################
@@ -182,10 +183,10 @@ class DialogConfiguration(QDialog):
 
     # Virtual event handlers, override them in your derived class
     def configurationShow(self):
-        pass
+        raise NotImplementedError("Derived class must implement configurationShow().")
 
     def configurationSave(self):
-        pass
+        raise NotImplementedError("Derived class must implement configurationSave().")
 
 
 ###########################################################################
@@ -224,4 +225,4 @@ class DialogAbout(QDialog):
 
     # Virtual event handlers, override them in your derived class
     def openGithub(self, event):
-        pass
+        raise NotImplementedError("Derived class must implement openGithub().")
