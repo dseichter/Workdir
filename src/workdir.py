@@ -20,9 +20,12 @@ import icons
 
 
 class WorkDirFrame(gui.MainFrame):
+    """
+    Main application window for Workdir.
+    Inherits from gui.MainFrame and connects UI actions.
+    """
     def __init__(self, parent=None):
         super().__init__(parent)
-        
         # Set icons
         self.setWindowIcon(icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48'))
         self.close_action.setIcon(icons.get_icon('logout_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
@@ -31,13 +34,16 @@ class WorkDirFrame(gui.MainFrame):
         self.update_action.setIcon(icons.get_icon('update_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.about_action.setIcon(icons.get_icon('info_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
 
-    def execute_command(self, cmd_name, directory):
+    def execute_command(self, cmd_name: str, directory: str) -> None:
+        """
+        Execute a command in the specified directory.
+        """
         cmd = settings.load_command(cmd_name)
         command = cmd['command'].replace('{directory}', directory)
         parameters = cmd['parameters'].replace('{directory}', directory)
         executecmd = command + ' ' + parameters
         env = os.environ.copy()
-        
+
         if cmd['use_env']:
             additionalenv = settings.load_env_vars()
             for customenv in additionalenv:
@@ -50,7 +56,7 @@ class WorkDirFrame(gui.MainFrame):
                                        QMessageBox.Yes | QMessageBox.No)
             if reply == QMessageBox.No:
                 return
-        
+
         # We need shell=True, to be able run everything!
         subprocess.Popen(executecmd, cwd=directory, env=env, shell=True) # nosec B602
 
@@ -111,8 +117,15 @@ class WorkDirFrame(gui.MainFrame):
             QMessageBox.information(self, 'No update', 'No new release available.')
 
 
-if __name__ == '__main__':
+def main() -> None:
+    """
+    Main entry point for the Workdir application.
+    """
     app = QApplication(sys.argv)
-    frame = WorkDirFrame()
-    frame.show()
+    window = WorkDirFrame()
+    window.show()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Workdir"
+version = "0.1.0"
+description = "A modernized Python project structure for Workdir."
+readme = "README.md"
+authors = [
+    { name = "dseichter" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/dseichter/Workdir"
+Documentation = "https://github.com/dseichter/Workdir"
+Repository = "https://github.com/dseichter/Workdir"
+
+[tool.setuptools]
+packages = ["src", "src.workdir", "src.workdir.dialogs"]
+
+[tool.setuptools.package-data]
+"src.workdir" = ["*.py"]
+
+[tool.setuptools.exclude-package-data]
+"src.workdir" = ["__pycache__/*"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["src/requirements.txt"]}
+
+[tool.setuptools.dynamic.readme]
+file = "README.md"

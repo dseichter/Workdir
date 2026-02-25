@@ -78,6 +78,12 @@ Install the required dependencies
 
 ```pip install -r src/requirements.txt```
 
+To build and install the project using the new pyproject.toml:
+
+```bash
+pip install .
+```
+
 To run the application:
 ```python src/workdir.py```
 
