@@ -10,6 +10,7 @@ import subprocess  # nosec B404
 import sys
 import webbrowser
 
+from PySide6.QtCore import QObject, QThread, Signal
 from PySide6.QtWidgets import QApplication, QGridLayout, QLabel, QMessageBox, QPushButton, QWidget
 
 import about_ui
@@ -20,6 +21,13 @@ import icons
 import settings
 
 
+class UpdateCheckWorker(QObject):
+    finished = Signal(bool)
+
+    def run(self) -> None:
+        self.finished.emit(helper.check_for_new_release())
+
+
 class WorkDirFrame(gui.MainFrame):
     """
     Main application window for Workdir.
@@ -27,6 +35,9 @@ class WorkDirFrame(gui.MainFrame):
     """
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._commands: dict[str, dict] = {}
+        self._update_thread: QThread | None = None
+        self._update_worker: UpdateCheckWorker | None = None
         # Set icons
         self.setWindowIcon(icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48'))
         self.close_action.setIcon(icons.get_icon('logout_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
@@ -39,7 +50,9 @@ class WorkDirFrame(gui.MainFrame):
         """
         Execute a command in the specified directory.
         """
-        cmd = settings.load_command(cmd_name)
+        cmd = self._commands.get(cmd_name)
+        if cmd is None:
+            cmd = settings.load_command(cmd_name)
         command = cmd['command'].replace('{directory}', directory)
         parameters = cmd['parameters'].replace('{directory}', directory)
         executecmd = command + ' ' + parameters
@@ -64,8 +77,9 @@ class WorkDirFrame(gui.MainFrame):
     def workdirShow(self):
         settings.create_config()
         self.setWindowTitle(f"{helper.NAME} {helper.VERSION}")
-        
+
         directories = settings.load_directories()
+        self._commands = {f"CMD{i}": settings.load_command(f"CMD{i}") for i in range(1, 7)}
         
         # Clear central widget
         widget = QWidget()
@@ -81,7 +95,7 @@ class WorkDirFrame(gui.MainFrame):
             # Command buttons
             for col in range(1, 7):
                 cmd_name = f"CMD{col}"
-                cmd = settings.load_command(cmd_name)
+                cmd = self._commands[cmd_name]
                 
                 button = QPushButton(cmd['label'])
                 button.setToolTip(f"{cmd['command']} {cmd['parameters']}")
@@ -108,14 +122,49 @@ class WorkDirFrame(gui.MainFrame):
         webbrowser.open_new_tab('https://github.com/dseichter/Workdir')
 
     def miHelpUpdate(self):
-        if helper.check_for_new_release():
-            reply = QMessageBox.question(self, 'Update available',
-                                       'A new release is available.\nWould you like to open the download page?',
-                                       QMessageBox.Yes | QMessageBox.No)
+        if self._update_thread is not None and self._update_thread.isRunning():
+            return
+
+        self.update_action.setEnabled(False)
+        self._update_thread = QThread(self)
+        self._update_worker = UpdateCheckWorker()
+        self._update_worker.moveToThread(self._update_thread)
+
+        self._update_thread.started.connect(self._update_worker.run)
+        self._update_worker.finished.connect(self._on_update_check_finished)
+        self._update_worker.finished.connect(self._update_thread.quit)
+        self._update_worker.finished.connect(self._update_worker.deleteLater)
+        self._update_thread.finished.connect(self._cleanup_update_thread)
+        self._update_thread.finished.connect(self._update_thread.deleteLater)
+        self._update_thread.start()
+
+    def workdirClose(self, event) -> None:
+        if self._update_thread is not None and self._update_thread.isRunning():
+            self._update_thread.quit()
+            if not self._update_thread.wait(10000):
+                self._update_thread.terminate()
+                self._update_thread.wait(1000)
+
+        if event is not None:
+            event.accept()
+
+    def _on_update_check_finished(self, has_update: bool) -> None:
+        if has_update:
+            reply = QMessageBox.question(
+                self,
+                'Update available',
+                'A new release is available.\nWould you like to open the download page?',
+                QMessageBox.Yes | QMessageBox.No,
+            )
             if reply == QMessageBox.Yes:
                 webbrowser.open_new_tab(helper.RELEASES)
         else:
             QMessageBox.information(self, 'No update', 'No new release available.')
+
+    def _cleanup_update_thread(self) -> None:
+        self._update_worker = None
+        self._update_thread = None
+        self.update_action.setEnabled(True)
 
 
 def main() -> None:
