@@ -13,6 +13,7 @@ Working with multiple directories and execute commands without navigate to them 
 </p>
 
 <p align="center">
+  <b><a href="https://dseichter.github.io/Workdir/">Documentation</a></b> •
   <b><a href="https://github.com/dseichter/Workdir/releases">Downloads</a></b> •
   <b><a href="https://github.com/dseichter/Workdir/issues">Issues</a></b>
 </p>
@@ -28,7 +29,7 @@ Working with multiple directories and execute commands without navigate to them 
 
 ## About 
 
-![Workdir](/images/workdir.png "Workdir")
+![Workdir](docs/docs/assets/screenshots/workdir.png "Workdir")
 
 My tool **Workdir** is one of the oldest tools I use. I have not been navigating back and forth between directories for over ten years now. I press a button and open my directories directly. I can also start executing commands with one click. With another button I directly start the command line. And sometimes I directly start a command inside the directory. This makes working with directories much easier.
 
@@ -38,7 +39,7 @@ You can *theoretically* specify an unlimited number of directories. Up to six in
 
 Download the [latest release](https://github.com/dseichter/Workdir/releases) into a destination folder of your choice and start the program. Via the configuration (menu Extras) you can specify your directories and store up to six commands.
 
-![Workdir - Configuration](/images/configuration.png "Workdir - Configuration")
+![Workdir - Configuration](docs/docs/assets/screenshots/configuration.png "Workdir - Configuration")
 
 Please note that in the current version you can only specify the directory itself as a placeholder. The examples for CMD and Windows Explorer should help you to implement your own calls. Once you click Save, the commands and directories are immediately available in the Directories tab.
 

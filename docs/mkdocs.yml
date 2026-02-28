@@ -1,0 +1,41 @@
+site_name: Workdir
+site_url: https://dseichter.github.io/Workdir/
+site_description: Working with multiple directories and execute commands without navigate to them.
+site_author: Daniel Seichter
+copyright: Copyright © 2024-2026 Daniel Seichter
+repo_url: https://github.com/dseichter/Workdir
+repo_name: dseichter/Workdir
+
+theme:
+  name: material
+  logo: assets/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
+  favicon: assets/folder_open_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png
+  icon:
+    alternate: fontawesome/solid/globe
+  palette:
+    - scheme: slate
+      primary: cyan
+      accent: green
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+      default: true
+    - scheme: default
+      primary: cyan
+      accent: green
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+nav:
+  - Home: index.md
+
+markdown_extensions:
+  - attr_list
+  - footnotes
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
