@@ -1,8 +1,21 @@
 # -*- coding: utf-8 -*-
 
-###########################################################################
-## Python code migrated from wxPython to PySide6
-## Original generated with wxFormBuilder (version 4.2.1-0-g80c4cb6)
+# Copyright (c) 2024-2026 Daniel Seichter
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+
 from PySide6.QtWidgets import QMainWindow, QWidget, QDialog, QColorDialog, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QCheckBox, QPushButton, QTextEdit, QDialogButtonBox
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction, QColor
@@ -18,22 +31,22 @@ class MainFrame(QMainWindow):
         self.resize(660, 387)
         
         # Create menu bar
-        self.menubar = self.menuBar()
+        self.menu_bar = self.menuBar()
         
         # File menu
-        self.file_menu = self.menubar.addMenu("File")
+        self.file_menu = self.menu_bar.addMenu("File")
         self.close_action = QAction("Close", self)
         self.close_action.triggered.connect(self.miFileClose)
         self.file_menu.addAction(self.close_action)
         
         # Extras menu
-        self.extras_menu = self.menubar.addMenu("Extras")
+        self.extras_menu = self.menu_bar.addMenu("Extras")
         self.config_action = QAction("Configuration", self)
         self.config_action.triggered.connect(self.miExtrasConfiguration)
         self.extras_menu.addAction(self.config_action)
         
         # Help menu
-        self.help_menu = self.menubar.addMenu("Help")
+        self.help_menu = self.menu_bar.addMenu("Help")
         self.support_action = QAction("Support...", self)
         self.support_action.triggered.connect(self.miHelpSupport)
         self.help_menu.addAction(self.support_action)
@@ -58,25 +71,26 @@ class MainFrame(QMainWindow):
 
     # Virtual event handlers, override them in your derived class
     def workdirClose(self, event):
-        pass
+        if event is not None:
+            event.accept()
 
     def workdirShow(self):
-        pass
+        raise NotImplementedError("Derived class must implement workdirShow().")
 
     def miFileClose(self):
-        pass
+        raise NotImplementedError("Derived class must implement miFileClose().")
 
     def miExtrasConfiguration(self):
-        pass
+        raise NotImplementedError("Derived class must implement miExtrasConfiguration().")
 
     def miHelpSupport(self):
-        pass
+        raise NotImplementedError("Derived class must implement miHelpSupport().")
 
     def miHelpUpdate(self):
-        pass
+        raise NotImplementedError("Derived class must implement miHelpUpdate().")
 
     def miHelpAbout(self):
-        pass
+        raise NotImplementedError("Derived class must implement miHelpAbout().")
 
 
 ###########################################################################
@@ -137,37 +151,42 @@ class DialogConfiguration(QDialog):
                 'color_value': '#000000'
             }
             
-            # Connect color button
-            color_button.clicked.connect(lambda checked, cmd=cmd_name: self.choose_color(cmd))
-        
+            # Connect color button using signal/slot
+            color_button.clicked.connect(self._make_color_slot(cmd_name))
+
         layout.addWidget(commands_widget)
-        
+
         # Directories and Environment Variables panel
         dirs_env_widget = QWidget()
         dirs_env_layout = QGridLayout(dirs_env_widget)
-        
+
         dirs_env_layout.addWidget(QLabel("Directories"), 0, 0)
         dirs_env_layout.addWidget(QLabel("Environment Variables"), 0, 1)
-        
+
         self.directories_text = QTextEdit()
         self.env_vars_text = QTextEdit()
-        
+
         dirs_env_layout.addWidget(self.directories_text, 1, 0)
         dirs_env_layout.addWidget(self.env_vars_text, 1, 1)
-        
+
         dirs_env_layout.addWidget(QLabel("Add one directory each line. If a directory is not available, no commands will be enabled."), 2, 0)
         dirs_env_layout.addWidget(QLabel("Add one Key/Pair (Key=Value) in each line to provide as environment variable."), 2, 1)
-        
+
         layout.addWidget(dirs_env_widget)
-        
+
         # Buttons
         button_box = QDialogButtonBox(QDialogButtonBox.Save | QDialogButtonBox.Cancel)
         button_box.accepted.connect(self.configurationSave)
         button_box.rejected.connect(self.reject)
         layout.addWidget(button_box)
-        
+
         # Show configuration
         self.configurationShow()
+
+    def _make_color_slot(self, cmd_name: str):
+        def slot():
+            self.choose_color(cmd_name)
+        return slot
     
     def choose_color(self, cmd_name):
         color = QColorDialog.getColor(QColor(self.cmd_controls[cmd_name]['color_value']), self)
@@ -177,10 +196,10 @@ class DialogConfiguration(QDialog):
 
     # Virtual event handlers, override them in your derived class
     def configurationShow(self):
-        pass
+        raise NotImplementedError("Derived class must implement configurationShow().")
 
     def configurationSave(self):
-        pass
+        raise NotImplementedError("Derived class must implement configurationSave().")
 
 
 ###########################################################################
@@ -219,4 +238,4 @@ class DialogAbout(QDialog):
 
     # Virtual event handlers, override them in your derived class
     def openGithub(self, event):
-        pass
+        raise NotImplementedError("Derived class must implement openGithub().")

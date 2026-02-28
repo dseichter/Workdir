@@ -30,4 +30,4 @@ jobs:
       - name: 'Ruff Lint'
         run: |
           # Exclude generated or packaging files from the Ruff check
-          ruff check . --exclude icons.py,version_info.py --output-format=github
+          ruff check . --exclude src/icons.py,src/resources_rc.py,version_info.py --output-format=github

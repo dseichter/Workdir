@@ -1,0 +1,12 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/icons">
+    <file alias="folder_open_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png">../icons/folder_open_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file alias="folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png">../icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file alias="globe_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png">../icons/globe_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file alias="info_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png">../icons/info_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file alias="logout_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png">../icons/logout_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file alias="settings_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png">../icons/settings_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file alias="update_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png">../icons/update_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png</file>
+  </qresource>
+</RCC>
