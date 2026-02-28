@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Workdir"
-version = "2026.1.2"
+version = "2026.2.28"
 description = "Work with multiple directories and run commands without navigating manually."
 readme = "README.md"
 authors = [
