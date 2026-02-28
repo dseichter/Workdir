@@ -29,6 +29,9 @@ theme:
 
 nav:
   - Home: index.md
+  - Installation: installation.md
+  - Development: development.md
+  - Known Issues: known_issues.md
 
 markdown_extensions:
   - attr_list

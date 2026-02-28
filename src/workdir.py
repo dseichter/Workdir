@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import subprocess  # nosec B404
+import subprocess  # NOSONAR nosec B404
 import sys
 import webbrowser
 
@@ -80,7 +80,7 @@ class WorkDirFrame(gui.MainFrame):
                 return
 
         # We need shell=True, to be able run everything!
-        subprocess.Popen(executecmd, cwd=directory, env=env, shell=True) # nosec B602
+        subprocess.Popen(executecmd, cwd=directory, env=env, shell=True) # NOSONAR nosec B602
 
     def workdirShow(self):
         settings.create_config()

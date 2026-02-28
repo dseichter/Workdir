@@ -37,3 +37,5 @@ Please always specify the directories using the placeholder `{directory}`. This 
 ## Known Issues
 
 If you run Workdir the first time, the window can be very small. The size is automatically adjusted based on your configured directories.
+
+See the dedicated page: [Known Issues](known_issues.md).
