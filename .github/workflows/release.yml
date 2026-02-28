@@ -26,7 +26,7 @@ jobs:
             run: pyinstaller --onefile -w src/workdir.py -n workdir-windows-${{ github.ref_name }}.exe --icon=icons/workdir.ico
 
           - name: Upload artifact
-            uses: actions/upload-artifact@v6
+            uses: actions/upload-artifact@v7
             with:
                   name: workdir-windows-${{ github.ref_name }}.exe
                   path: dist/workdir-windows-${{ github.ref_name }}.exe   
@@ -53,7 +53,7 @@ jobs:
             run: pyinstaller --onefile src/workdir.py -n workdir-linux-${{ github.ref_name }} --icon=icons/workdir.ico
 
           - name: Upload artifact
-            uses: actions/upload-artifact@v6
+            uses: actions/upload-artifact@v7
             with:
               name: workdir-linux-${{ github.ref_name }}
               path: dist/workdir-linux-${{ github.ref_name }}
