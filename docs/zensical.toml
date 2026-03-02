@@ -1,0 +1,53 @@
+[project]
+site_name = "Workdir"
+site_url = "https://dseichter.github.io/Workdir/"
+site_description = "Working with multiple directories and execute commands without navigate to them."
+site_author = "Daniel Seichter"
+copyright = "Copyright © 2024-2026 Daniel Seichter"
+repo_url = "https://github.com/dseichter/Workdir"
+repo_name = "dseichter/Workdir"
+docs_dir = "docs"
+site_dir = "site"
+
+nav = [
+  { Home = "index.md" },
+  { Installation = "installation.md" },
+  { Development = "development.md" },
+  { "Known Issues" = "known_issues.md" },
+]
+
+[project.theme]
+logo = "assets/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png"
+favicon = "assets/folder_open_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24.png"
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "cyan"
+accent = "red"
+default = true
+toggle.icon = "material/weather-sunny"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "cyan"
+accent = "red"
+toggle.icon = "material/weather-night"
+toggle.name = "Switch to dark mode"
+
+[project.theme.icon]
+alternate = "fontawesome/solid/globe"
+
+[project.markdown_extensions.pymdownx.emoji]
+emoji_index = "zensical.extensions.emoji.twemoji"
+emoji_generator = "zensical.extensions.emoji.to_svg"
+
+[project.markdown_extensions.attr_list]
+
+[project.markdown_extensions.footnotes]
+
+[project.markdown_extensions.admonition]
+
+[project.markdown_extensions.pymdownx.details]
+
+[project.markdown_extensions.pymdownx.superfences]
