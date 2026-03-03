@@ -14,6 +14,13 @@ Please always specify the directories using the variable `{directory}`. This wil
 
 You can also specify additional environment variables. They will be added to your default ones.
 
+## Tray behavior
+
+Workdir provides a system tray icon.
+
+- If **Minimize to tray** is enabled in Configuration, minimizing the window hides Workdir to the tray.
+- Each directory has a submenu with all the configured commands.
+
 ## Multiple Configurations
 
 Workdir can be used multiple times. Create a subfolder each time, which you name `Development` or `Projects`, for example. Copy the application file into these directories. When you start the program, it will check if there is already a configuration there (if not, the program will create it automatically).

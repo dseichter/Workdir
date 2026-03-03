@@ -49,6 +49,8 @@ Please always specify the directories using the variable {directory}. This will 
 
 You can also specify additional environment variables. They will be added to your default ones.
 
+Workdir includes a tray icon. You can minimize the main window to the system tray and continue running commands from the tray menu.
+
 ## Multiple configurations
 
 I am asked from time to time if I would like to offer more than six commands. This request is mostly based on the need to handle different types of directories with different commands. Very gladly I give my answer in summary, so that it can help you from the beginning:

@@ -22,6 +22,8 @@ Binaries for Windows and Linux are available (see [releases](https://github.com/
 - Configure up to six commands per directory
 - Use confirmation prompts for sensitive commands
 - Attach additional environment variables for execution
+- Minimize to tray and run commands from tray submenus
+- Create a desktop link from **Extras** (Linux and Windows)
 - Reuse Workdir with multiple independent configurations
 
 ## Installation and Configuration

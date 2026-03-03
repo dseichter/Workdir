@@ -179,6 +179,9 @@ class DialogConfiguration(QDialog):
         dirs_env_layout.addWidget(QLabel("Add one directory each line. If a directory is not available, no commands will be enabled."), 2, 0)
         dirs_env_layout.addWidget(QLabel("Add one Key/Pair (Key=Value) in each line to provide as environment variable."), 2, 1)
 
+        self.minimize_to_tray_check = QCheckBox("Minimize to tray")
+        dirs_env_layout.addWidget(self.minimize_to_tray_check, 3, 0)
+
         layout.addWidget(dirs_env_widget)
 
         # Buttons
