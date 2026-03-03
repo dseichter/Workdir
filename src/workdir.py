@@ -14,12 +14,15 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import os
+import shlex
+import shutil
 import subprocess  # nosec B404  # NOSONAR
 import sys
 import webbrowser
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QEvent, QStandardPaths, QThread, QTimer, Signal
+from PySide6.QtCore import QObject, QEvent, QStandardPaths, QThread, QTimer, Signal, Qt
+from PySide6.QtGui import QCursor
 from PySide6.QtWidgets import (
     QApplication,
     QGridLayout,
@@ -364,13 +367,87 @@ class WorkDirFrame(gui.MainFrame):
                     env[key] = value
 
         if cmd['confirmation']:
-            reply = QMessageBox.question(self, 'Confirmation', f'Execute command: {executecmd}',
-                                       QMessageBox.Yes | QMessageBox.No)
+            reply = self._show_message_box(
+                QMessageBox.Question,
+                'Confirmation',
+                f'Execute command: {executecmd}',
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No,
+            )
             if reply == QMessageBox.No:
                 return
 
+        if not self._is_command_available(command):
+            self._show_message_box(
+                QMessageBox.Critical,
+                'Command not found',
+                f'Unable to find command:\n{command}\n\nPlease update your configuration.',
+                QMessageBox.Ok,
+            )
+            return
+
         # We need shell=True, to be able run everything!
-        subprocess.Popen(executecmd, cwd=directory, env=env, shell=True)  # nosec B602  # NOSONAR
+        try:
+            subprocess.Popen(executecmd, cwd=directory, env=env, shell=True)  # nosec B602  # NOSONAR
+        except OSError as exc:
+            self._show_message_box(QMessageBox.Critical, 'Command error', f'Failed to start command:\n{exc}', QMessageBox.Ok)
+
+    def _show_message_box(
+        self,
+        icon: QMessageBox.Icon,
+        title: str,
+        text: str,
+        buttons: QMessageBox.StandardButtons,
+        default_button: QMessageBox.StandardButton = QMessageBox.NoButton,
+    ) -> int:
+        parent = self if self.isVisible() and not self.isMinimized() else None
+        message_box = QMessageBox(parent)
+        message_box.setIcon(icon)
+        message_box.setWindowTitle(title)
+        message_box.setText(text)
+        message_box.setStandardButtons(buttons)
+        if default_button != QMessageBox.NoButton:
+            message_box.setDefaultButton(default_button)
+
+        if parent is None:
+            message_box.setWindowModality(Qt.ApplicationModal)
+            message_box.adjustSize()
+            screen = QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen()
+            if screen is not None:
+                geometry = screen.availableGeometry()
+                frame = message_box.frameGeometry()
+                frame.moveCenter(geometry.center())
+                message_box.move(frame.topLeft())
+
+        return message_box.exec()
+
+    @staticmethod
+    def _is_command_available(command: str) -> bool:
+        command = command.strip()
+        if not command:
+            return False
+
+        if os.name == 'nt':
+            shell_builtins = {'cmd', 'powershell', 'pwsh'}
+        else:
+            shell_builtins = {'cd', 'echo', 'test', 'pwd', 'true', 'false'}
+
+        try:
+            parts = shlex.split(command, posix=(os.name != 'nt'))
+        except ValueError:
+            return True
+
+        if not parts:
+            return False
+
+        executable = parts[0]
+        if executable.lower() in shell_builtins:
+            return True
+
+        if os.path.isabs(executable) or os.path.sep in executable:
+            return os.path.isfile(executable)
+
+        return shutil.which(executable) is not None
 
     def workdirShow(self):
         settings.create_config()
