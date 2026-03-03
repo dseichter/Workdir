@@ -1,0 +1,122 @@
+name: Build Flatpak
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing release tag to attach asset to (for manual runs)'
+        required: false
+        type: string
+
+jobs:
+  build-flatpak:
+    name: Build Flatpak
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # v6
+
+      - name: Resolve release tag
+        id: vars
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ -n "$INPUT_RELEASE_TAG" ]; then
+            TAG="$INPUT_RELEASE_TAG"
+          fi
+          if [ -z "$TAG" ] || [[ ! "$TAG" =~ ^v[0-9A-Za-z._-]+$ ]]; then
+            echo "A valid tag (e.g. v2026.3.1) is required." >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+        with:
+          python-version: '3.14'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak flatpak-builder
+          python -m pip install --upgrade pip
+          python -m pip install -r src/requirements.txt
+
+      - name: Build Linux binary
+        run: |
+          pyinstaller --onefile src/workdir.py -n workdir --icon=icons/workdir.ico
+
+      - name: Prepare Flatpak manifest
+        run: |
+          mkdir -p packaging
+
+          cat > packaging/io.github.dseichter.Workdir.desktop << 'EOF'
+          [Desktop Entry]
+          Type=Application
+          Name=Workdir
+          Exec=workdir
+          Icon=io.github.dseichter.Workdir
+          Categories=Utility;Development;
+          Terminal=false
+          EOF
+
+          cat > packaging/io.github.dseichter.Workdir.yaml << 'EOF'
+          app-id: io.github.dseichter.Workdir
+          runtime: org.freedesktop.Platform
+          runtime-version: "24.08"
+          sdk: org.freedesktop.Sdk
+          command: workdir
+          finish-args:
+            - --share=ipc
+            - --socket=fallback-x11
+            - --socket=wayland
+            - --device=dri
+            - --filesystem=home
+          modules:
+            - name: workdir
+              buildsystem: simple
+              build-commands:
+                - install -Dm755 workdir /app/bin/workdir
+                - install -Dm644 io.github.dseichter.Workdir.desktop /app/share/applications/io.github.dseichter.Workdir.desktop
+                - install -Dm644 io.github.dseichter.Workdir.png /app/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png
+              sources:
+                - type: file
+                  path: dist/workdir
+                  dest-filename: workdir
+                - type: file
+                  path: packaging/io.github.dseichter.Workdir.desktop
+                  dest-filename: io.github.dseichter.Workdir.desktop
+                - type: file
+                  path: icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
+                  dest-filename: io.github.dseichter.Workdir.png
+          EOF
+
+      - name: Install Flatpak runtime
+        run: |
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
+
+      - name: Build Flatpak bundle
+        env:
+          RELEASE_TAG: ${{ steps.vars.outputs.tag }}
+        run: |
+          flatpak-builder --force-clean --repo=repo flatpak-build packaging/io.github.dseichter.Workdir.yaml
+          flatpak build-bundle repo "workdir-flatpak-${RELEASE_TAG}-x86_64.flatpak" io.github.dseichter.Workdir
+
+      - name: Upload Flatpak artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: workdir-flatpak-${{ steps.vars.outputs.tag }}-x86_64
+          path: workdir-flatpak-${{ steps.vars.outputs.tag }}-x86_64.flatpak
+
+      - name: Upload Flatpak to Release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        with:
+          tag_name: ${{ steps.vars.outputs.tag }}
+          files: workdir-flatpak-${{ steps.vars.outputs.tag }}-x86_64.flatpak
