@@ -79,9 +79,9 @@ jobs:
           # Get commits since last tag
           LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
           if [ -z "$LAST_TAG" ]; then
-            COMMITS=$(git log --pretty=format:"* %s by @%an in %H" --no-merges)
+            COMMITS=$(git log --pretty=format:"* %s by @%ae in %H" --no-merges | sed -E 's/@([^@ ]+)@[^ ]+/@\1/g')
           else
-            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"* %s by @%an in %H" --no-merges)
+            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"* %s by @%ae in %H" --no-merges | sed -E 's/@([^@ ]+)@[^ ]+/@\1/g')
           fi
 
           # Separate dependabot and regular changes
