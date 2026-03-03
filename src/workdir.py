@@ -135,14 +135,6 @@ class WorkDirFrame(gui.MainFrame):
 
         dir_menu = QMenu(directory, self._tray_menu)
 
-        if not os.path.isdir(directory):
-            unavailable_action = dir_menu.addAction('Directory not available')
-            unavailable_action.setEnabled(False)
-            dir_menu.setEnabled(False)
-            action = self._tray_menu.insertMenu(self._tray_quit_separator, dir_menu)
-            self._tray_directory_entries.append(action)
-            return
-
         has_command = False
         for col in range(1, 7):
             cmd_name = f'CMD{col}'
