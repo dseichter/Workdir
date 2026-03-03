@@ -60,7 +60,7 @@ class WorkDirFrame(gui.MainFrame):
     def _get_desktop_directory_linux() -> Path:
         desktop_dir = Path.home() / "Desktop"
         try:
-            result = subprocess.run(
+            result = subprocess.run(  # nosec B603, B607  # NOSONAR
                 ["xdg-user-dir", "DESKTOP"],
                 capture_output=True,
                 text=True,
@@ -77,7 +77,7 @@ class WorkDirFrame(gui.MainFrame):
     def _get_desktop_directory_windows() -> Path:
         desktop_dir = Path.home() / "Desktop"
         try:
-            result = subprocess.run(
+            result = subprocess.run(  # nosec B603, B607  # NOSONAR
                 [
                     "powershell",
                     "-NoProfile",
@@ -211,7 +211,7 @@ class WorkDirFrame(gui.MainFrame):
             "$shortcut.Save()"
         )
 
-        subprocess.run(
+        subprocess.run(  # nosec B603, B607  # NOSONAR
             ["powershell", "-NoProfile", "-NonInteractive", "-Command", ps_script],
             capture_output=True,
             text=True,
