@@ -1,0 +1,93 @@
+name: Build AppImage
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing release tag to attach asset to (for manual runs)'
+        required: false
+        type: string
+
+jobs:
+  build-appimage:
+    name: Build AppImage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # v6
+
+      - name: Resolve release tag
+        id: vars
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.release_tag }}" ]; then
+            TAG="${{ inputs.release_tag }}"
+          fi
+          if [ -z "$TAG" ] || [[ ! "$TAG" =~ ^v ]]; then
+            echo "A valid tag (e.g. v2026.3.1) is required." >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+        with:
+          python-version: '3.14'
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2 patchelf desktop-file-utils
+          python -m pip install --upgrade pip
+          python -m pip install -r src/requirements.txt
+
+      - name: Build Linux binary
+        run: |
+          pyinstaller --onefile src/workdir.py -n workdir --icon=icons/workdir.ico
+
+      - name: Prepare AppDir
+        run: |
+          mkdir -p AppDir/usr/bin
+          mkdir -p AppDir/usr/share/applications
+          mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
+
+          install -Dm755 dist/workdir AppDir/usr/bin/workdir
+          install -Dm644 icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png AppDir/usr/share/icons/hicolor/256x256/apps/workdir.png
+
+          cat > AppDir/usr/share/applications/workdir.desktop << 'EOF'
+          [Desktop Entry]
+          Type=Application
+          Name=Workdir
+          Exec=workdir
+          Icon=workdir
+          Categories=Utility;Development;
+          Terminal=false
+          EOF
+
+          cat > AppDir/AppRun << 'EOF'
+          #!/bin/sh
+          exec "$APPDIR/usr/bin/workdir" "$@"
+          EOF
+          chmod +x AppDir/AppRun
+
+      - name: Build AppImage
+        run: |
+          wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
+          ARCH=x86_64 ./appimagetool-x86_64.AppImage AppDir workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64
+          path: workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage
+
+      - name: Upload AppImage to Release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        with:
+          tag_name: ${{ steps.vars.outputs.tag }}
+          files: workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage
