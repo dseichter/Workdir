@@ -19,8 +19,17 @@ import sys
 import webbrowser
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QStandardPaths, QThread, Signal
-from PySide6.QtWidgets import QApplication, QGridLayout, QLabel, QMessageBox, QPushButton, QWidget
+from PySide6.QtCore import QObject, QEvent, QStandardPaths, QThread, QTimer, Signal
+from PySide6.QtWidgets import (
+    QApplication,
+    QGridLayout,
+    QLabel,
+    QMenu,
+    QMessageBox,
+    QPushButton,
+    QSystemTrayIcon,
+    QWidget,
+)
 
 import about_ui
 import configuration_ui
@@ -43,10 +52,18 @@ class WorkDirFrame(gui.MainFrame):
     Inherits from gui.MainFrame and connects UI actions.
     """
     def __init__(self, parent=None):
-        super().__init__(parent)
         self._commands: dict[str, dict] = {}
         self._update_thread: QThread | None = None
         self._update_worker: UpdateCheckWorker | None = None
+        self._tray_icon: QSystemTrayIcon | None = None
+        self._tray_menu: QMenu | None = None
+        self._tray_directory_entries: list = []
+        self._tray_quit_separator = None
+        self._tray_hint_shown = False
+        self._is_quitting = False
+        self._minimize_to_tray = True
+
+        super().__init__(parent)
         # Set icons
         self.setWindowIcon(icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48'))
         self.close_action.setIcon(icons.get_icon('logout_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
@@ -55,6 +72,122 @@ class WorkDirFrame(gui.MainFrame):
         self.support_action.setIcon(icons.get_icon('globe_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.update_action.setIcon(icons.get_icon('update_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.about_action.setIcon(icons.get_icon('info_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
+        self._init_tray_icon()
+        self._update_tray_menu(settings.load_directories() or [])
+
+    def _init_tray_icon(self) -> None:
+        if not QSystemTrayIcon.isSystemTrayAvailable():
+            return
+
+        self._tray_icon = QSystemTrayIcon(self.windowIcon(), self)
+        self._tray_icon.setToolTip(helper.NAME)
+
+        self._tray_menu = QMenu(self)
+
+        show_action = self._tray_menu.addAction('Show Workdir')
+        show_action.triggered.connect(self._restore_from_tray)
+
+        self._tray_menu.addSeparator()
+        self._tray_quit_separator = self._tray_menu.addSeparator()
+        quit_action = self._tray_menu.addAction('Quit')
+        quit_action.triggered.connect(self._quit_from_tray)
+
+        self._tray_icon.setContextMenu(self._tray_menu)
+        self._tray_icon.activated.connect(self._on_tray_activated)
+        self._tray_icon.show()
+
+    def _restore_from_tray(self) -> None:
+        self.showNormal()
+        self.raise_()
+        self.activateWindow()
+
+    def _quit_from_tray(self) -> None:
+        self._is_quitting = True
+        if self._tray_icon is not None:
+            self._tray_icon.hide()
+        self.close()
+        QApplication.quit()
+
+    def _on_tray_activated(self, reason: QSystemTrayIcon.ActivationReason) -> None:
+        if reason in (QSystemTrayIcon.Trigger, QSystemTrayIcon.DoubleClick):
+            self._restore_from_tray()
+
+    def _update_tray_menu(self, directories: list[str]) -> None:
+        if self._tray_menu is None or self._tray_quit_separator is None:
+            return
+
+        for entry in self._tray_directory_entries:
+            self._tray_menu.removeAction(entry)
+        self._tray_directory_entries = []
+
+        if not directories:
+            no_dirs_action = self._tray_menu.insertAction(self._tray_quit_separator, self._tray_menu.addAction('No directories configured'))
+            no_dirs_action.setEnabled(False)
+            self._tray_directory_entries.append(no_dirs_action)
+            return
+
+        for directory in directories:
+            self._add_directory_to_tray_menu(directory)
+
+    def _add_directory_to_tray_menu(self, directory: str) -> None:
+        if self._tray_menu is None or self._tray_quit_separator is None:
+            return
+
+        dir_menu = QMenu(directory, self._tray_menu)
+
+        if not os.path.isdir(directory):
+            unavailable_action = dir_menu.addAction('Directory not available')
+            unavailable_action.setEnabled(False)
+            dir_menu.setEnabled(False)
+            action = self._tray_menu.insertMenu(self._tray_quit_separator, dir_menu)
+            self._tray_directory_entries.append(action)
+            return
+
+        has_command = False
+        for col in range(1, 7):
+            cmd_name = f'CMD{col}'
+            cmd = self._commands.get(cmd_name)
+            if cmd is None or cmd.get('command', '') == '':
+                continue
+
+            label = cmd.get('label') or cmd_name
+            action = dir_menu.addAction(label)
+            action.setToolTip(f"{cmd.get('command', '')} {cmd.get('parameters', '')}")
+            action.triggered.connect(lambda checked=False, c=cmd_name, d=directory: self.execute_command(c, d))
+            has_command = True
+
+        if not has_command:
+            no_cmd_action = dir_menu.addAction('No command configured')
+            no_cmd_action.setEnabled(False)
+
+        action = self._tray_menu.insertMenu(self._tray_quit_separator, dir_menu)
+        self._tray_directory_entries.append(action)
+
+    def changeEvent(self, event) -> None:
+        tray_icon = getattr(self, '_tray_icon', None)
+        minimize_to_tray = getattr(self, '_minimize_to_tray', False)
+        is_quitting = getattr(self, '_is_quitting', False)
+
+        if (
+            tray_icon is not None
+            and event.type() == QEvent.WindowStateChange
+            and self.isMinimized()
+            and minimize_to_tray
+            and not is_quitting
+        ):
+            QTimer.singleShot(0, self.hide)
+            if not self._tray_hint_shown:
+                tray_icon.showMessage(
+                    helper.NAME,
+                    'Workdir is still running in the system tray.',
+                    QSystemTrayIcon.Information,
+                    3000,
+                )
+                self._tray_hint_shown = True
+            event.accept()
+            return
+
+        super().changeEvent(event)
 
     @staticmethod
     def _get_desktop_directory_linux() -> Path:
@@ -250,6 +383,7 @@ class WorkDirFrame(gui.MainFrame):
     def workdirShow(self):
         settings.create_config()
         self.setWindowTitle(f"{helper.NAME} {helper.VERSION}")
+        self._minimize_to_tray = settings.load_minimize_to_tray()
 
         directories = settings.load_directories()
         self._commands = {f"CMD{i}": settings.load_command(f"CMD{i}") for i in range(1, 7)}
@@ -278,9 +412,10 @@ class WorkDirFrame(gui.MainFrame):
                 
                 layout.addWidget(button, row, col)
 
+            self._update_tray_menu(directories)
+
     def miFileClose(self):
-        self.close()
-        QApplication.quit()
+        self._quit_from_tray()
 
     def miExtrasConfiguration(self):
         dlg = configuration_ui.DialogConfiguration(self)
@@ -328,6 +463,9 @@ class WorkDirFrame(gui.MainFrame):
             if not self._update_thread.wait(10000):
                 self._update_thread.terminate()
                 self._update_thread.wait(1000)
+
+        if self._is_quitting and self._tray_icon is not None:
+            self._tray_icon.hide()
 
         if event is not None:
             event.accept()

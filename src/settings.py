@@ -19,6 +19,34 @@ import os
 CONFIGFILE = 'config.json'
 
 
+def _default_command(cmd: str) -> dict:
+    return {
+        'label': 'CMD' if cmd == 'CMD1' else '',
+        'command': 'cmd' if cmd == 'CMD1' else '',
+        'parameters': '/k "cd {directory}"' if cmd == 'CMD1' else '',
+        'use_env': False,
+        'confirmation': False,
+        'colour': '#000000',
+    }
+
+
+def _ensure_base_settings(data: dict) -> None:
+    if 'directories' not in data or len(data['directories']) == 0:
+        data['directories'] = [os.path.expanduser("~")]
+
+    if 'env' not in data:
+        data['env'] = []
+
+    if 'minimize_to_tray' not in data:
+        data['minimize_to_tray'] = True
+
+
+def _ensure_command_defaults(data: dict) -> None:
+    for cmd in ['CMD1', 'CMD2', 'CMD3', 'CMD4', 'CMD5', 'CMD6']:
+        if cmd not in data:
+            data[cmd] = _default_command(cmd)
+
+
 def create_config():
     # create the config file if it does not exist
     try:
@@ -31,21 +59,8 @@ def create_config():
     with open(CONFIGFILE, 'r') as f:
         data = json.load(f)
 
-    if 'directories' not in data or len(data['directories']) == 0:
-        data['directories'] = [os.path.expanduser("~")]
-
-    if 'env' not in data:
-        data['env'] = []
-
-    for cmd in ['CMD1', 'CMD2', 'CMD3', 'CMD4', 'CMD5', 'CMD6']:
-        if cmd not in data:
-            data[cmd] = {}
-            data[cmd]['label'] = 'CMD' if cmd == 'CMD1' else ''
-            data[cmd]['command'] = 'cmd' if cmd == 'CMD1' else ''
-            data[cmd]['parameters'] = '/k "cd {directory}"' if cmd == 'CMD1' else ''
-            data[cmd]['use_env'] = False
-            data[cmd]['confirmation'] = False
-            data[cmd]['colour'] = '#000000'
+    _ensure_base_settings(data)
+    _ensure_command_defaults(data)
 
     with open(CONFIGFILE, 'w') as f:
         json.dump(data, f, indent=4, sort_keys=True)
@@ -117,6 +132,23 @@ def save_command(key, cmd):
         data = json.load(f)
 
     data[key] = cmd
+
+    with open(CONFIGFILE, 'w') as f:
+        json.dump(data, f, indent=4, sort_keys=True)
+
+
+def load_minimize_to_tray() -> bool:
+    with open(CONFIGFILE, 'r') as f:
+        data = json.load(f)
+
+    return bool(data.get('minimize_to_tray', True))
+
+
+def save_minimize_to_tray(value: bool) -> None:
+    with open(CONFIGFILE, 'r') as f:
+        data = json.load(f)
+
+    data['minimize_to_tray'] = bool(value)
 
     with open(CONFIGFILE, 'w') as f:
         json.dump(data, f, indent=4, sort_keys=True)

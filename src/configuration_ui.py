@@ -38,6 +38,8 @@ class DialogConfiguration(gui.DialogConfiguration):
         if env:
             self.env_vars_text.setPlainText('\n'.join(env))
 
+        self.minimize_to_tray_check.setChecked(settings.load_minimize_to_tray())
+
         for i in range(1, 7):
             cmd_name = f"CMD{i}"
             cmd = settings.load_command(cmd_name)
@@ -62,6 +64,8 @@ class DialogConfiguration(gui.DialogConfiguration):
         env = self.env_vars_text.toPlainText().split('\n')
         env = [e for e in env if e.strip()]
         settings.save_env_vars(env)
+
+        settings.save_minimize_to_tray(self.minimize_to_tray_check.isChecked())
 
         for i in range(1, 7):
             cmd_name = f"CMD{i}"
