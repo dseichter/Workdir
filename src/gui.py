@@ -41,6 +41,10 @@ class MainFrame(QMainWindow):
         
         # Extras menu
         self.extras_menu = self.menu_bar.addMenu("Extras")
+        self.desktop_link_action = QAction("Create desktop link", self)
+        self.desktop_link_action.triggered.connect(self.miExtrasCreateDesktopLink)
+        self.extras_menu.addAction(self.desktop_link_action)
+
         self.config_action = QAction("Configuration", self)
         self.config_action.triggered.connect(self.miExtrasConfiguration)
         self.extras_menu.addAction(self.config_action)
@@ -82,6 +86,9 @@ class MainFrame(QMainWindow):
 
     def miExtrasConfiguration(self):
         raise NotImplementedError("Derived class must implement miExtrasConfiguration().")
+
+    def miExtrasCreateDesktopLink(self):
+        raise NotImplementedError("Derived class must implement miExtrasCreateDesktopLink().")
 
     def miHelpSupport(self):
         raise NotImplementedError("Derived class must implement miHelpSupport().")

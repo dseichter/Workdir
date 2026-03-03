@@ -17,8 +17,9 @@ import os
 import subprocess  # nosec B404  # NOSONAR
 import sys
 import webbrowser
+from pathlib import Path
 
-from PySide6.QtCore import QObject, QThread, Signal
+from PySide6.QtCore import QObject, QStandardPaths, QThread, Signal
 from PySide6.QtWidgets import QApplication, QGridLayout, QLabel, QMessageBox, QPushButton, QWidget
 
 import about_ui
@@ -49,10 +50,174 @@ class WorkDirFrame(gui.MainFrame):
         # Set icons
         self.setWindowIcon(icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48'))
         self.close_action.setIcon(icons.get_icon('logout_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
+        self.desktop_link_action.setIcon(icons.get_icon('folder_open_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.config_action.setIcon(icons.get_icon('settings_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.support_action.setIcon(icons.get_icon('globe_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.update_action.setIcon(icons.get_icon('update_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
         self.about_action.setIcon(icons.get_icon('info_24dp_8B1A10_FILL0_wght400_GRAD0_opsz24'))
+
+    @staticmethod
+    def _get_desktop_directory_linux() -> Path:
+        desktop_dir = Path.home() / "Desktop"
+        try:
+            result = subprocess.run(  # nosec B603, B607  # NOSONAR
+                ["xdg-user-dir", "DESKTOP"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            candidate = Path(result.stdout.strip())
+            if candidate:
+                desktop_dir = candidate
+        except (OSError, subprocess.SubprocessError):
+            pass
+        return desktop_dir
+
+    @staticmethod
+    def _get_desktop_directory_windows() -> Path:
+        desktop_dir = Path.home() / "Desktop"
+        try:
+            result = subprocess.run(  # nosec B603, B607  # NOSONAR
+                [
+                    "powershell",
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "[Environment]::GetFolderPath('Desktop')",
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            candidate = Path(result.stdout.strip())
+            if candidate:
+                desktop_dir = candidate
+        except (OSError, subprocess.SubprocessError):
+            pass
+        return desktop_dir
+
+    @staticmethod
+    def _get_launch_target_and_arguments() -> tuple[str, str, str]:
+        if getattr(sys, 'frozen', False):
+            target = os.path.abspath(sys.executable)
+            arguments = ""
+            working_directory = str(Path(target).parent)
+        else:
+            script_path = os.path.abspath(__file__)
+            target = sys.executable
+            arguments = f'"{script_path}"'
+            working_directory = str(Path(script_path).parent)
+        return target, arguments, working_directory
+
+    @staticmethod
+    def _get_desktop_icon_path() -> str:
+        app_data_location = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
+        if app_data_location:
+            icon_dir = Path(app_data_location)
+        else:
+            icon_dir = Path.home() / ".local" / "share" / helper.NAME
+
+        try:
+            icon_dir.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            return ""
+
+        icon = icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48')
+        if icon.isNull():
+            return ""
+
+        pixmap = icon.pixmap(256, 256)
+        if pixmap.isNull():
+            return ""
+
+        icon_path = icon_dir / "workdir_shortcut_icon.png"
+        if not pixmap.save(str(icon_path), "PNG"):
+            return ""
+        return str(icon_path)
+
+    @staticmethod
+    def _get_windows_desktop_icon_path() -> str:
+        app_data_location = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
+        if app_data_location:
+            icon_dir = Path(app_data_location)
+        else:
+            icon_dir = Path.home() / "AppData" / "Local" / helper.NAME
+
+        try:
+            icon_dir.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            return ""
+
+        icon = icons.get_icon('folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48')
+        if icon.isNull():
+            return ""
+
+        pixmap = icon.pixmap(256, 256)
+        if pixmap.isNull():
+            return ""
+
+        icon_path = icon_dir / "workdir_shortcut_icon.ico"
+        if pixmap.save(str(icon_path), "ICO"):
+            return str(icon_path)
+        return ""
+
+    def _create_linux_desktop_link(self) -> Path:
+        desktop_dir = self._get_desktop_directory_linux()
+        desktop_dir.mkdir(parents=True, exist_ok=True)
+        target_path = desktop_dir / "Workdir.desktop"
+
+        target, arguments, _ = self._get_launch_target_and_arguments()
+        executable = f'"{target}"'
+        if arguments:
+            executable = f"{executable} {arguments}"
+
+        icon_path = self._get_desktop_icon_path()
+        icon_line = f"Icon={icon_path}\n" if icon_path else ""
+
+        desktop_entry = (
+            "[Desktop Entry]\n"
+            "Version=1.0\n"
+            "Type=Application\n"
+            "Name=Workdir\n"
+            "Comment=Start Workdir\n"
+            f"Exec={executable}\n"
+            f"{icon_line}"
+            "Terminal=false\n"
+            "Categories=Utility;Development;\n"
+        )
+
+        target_path.write_text(desktop_entry, encoding='utf-8')
+        target_path.chmod(0o755)
+        return target_path
+
+    def _create_windows_desktop_link(self) -> Path:
+        desktop_dir = self._get_desktop_directory_windows()
+        desktop_dir.mkdir(parents=True, exist_ok=True)
+        target_path = desktop_dir / "Workdir.lnk"
+
+        target, arguments, working_directory = self._get_launch_target_and_arguments()
+        icon_path = self._get_windows_desktop_icon_path() or self._get_desktop_icon_path() or target
+
+        def _ps_escape(value: str) -> str:
+            return value.replace("'", "''")
+
+        ps_script = (
+            "$shell = New-Object -ComObject WScript.Shell; "
+            f"$shortcut = $shell.CreateShortcut('{_ps_escape(str(target_path))}'); "
+            f"$shortcut.TargetPath = '{_ps_escape(target)}'; "
+            f"$shortcut.Arguments = '{_ps_escape(arguments)}'; "
+            f"$shortcut.WorkingDirectory = '{_ps_escape(working_directory)}'; "
+            f"$shortcut.IconLocation = '{_ps_escape(icon_path)}'; "
+            "$shortcut.Save()"
+        )
+
+        subprocess.run(  # nosec B603, B607  # NOSONAR
+            ["powershell", "-NoProfile", "-NonInteractive", "-Command", ps_script],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return target_path
 
     def execute_command(self, cmd_name: str, directory: str) -> None:
         """
@@ -121,6 +286,17 @@ class WorkDirFrame(gui.MainFrame):
         dlg = configuration_ui.DialogConfiguration(self)
         dlg.exec()
         self.workdirShow()
+
+    def miExtrasCreateDesktopLink(self):
+        try:
+            if sys.platform == 'win32':
+                target_path = self._create_windows_desktop_link()
+            else:
+                target_path = self._create_linux_desktop_link()
+
+            QMessageBox.information(self, 'Desktop link', f'Desktop link created:\n{target_path}')
+        except (OSError, subprocess.SubprocessError) as exc:
+            QMessageBox.critical(self, 'Desktop link', f'Failed to create desktop link:\n{exc}')
 
     def miHelpAbout(self):
         dlg = about_ui.DialogAbout(self)
