@@ -71,6 +71,9 @@ jobs:
           Terminal=false
           EOF
 
+          install -Dm644 AppDir/usr/share/applications/workdir.desktop AppDir/workdir.desktop
+          install -Dm644 AppDir/usr/share/icons/hicolor/256x256/apps/workdir.png AppDir/workdir.png
+
           cat > AppDir/AppRun << 'EOF'
           #!/bin/sh
           exec "$APPDIR/usr/bin/workdir" "$@"
