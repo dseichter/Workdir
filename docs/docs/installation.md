@@ -14,6 +14,8 @@ Please always specify the directories using the variable `{directory}`. This wil
 
 You can also specify additional environment variables. They will be added to your default ones.
 
+Configuration is stored per user profile at `~/.workdir/config.json` (on Windows this resolves to your user home, e.g. `C:\\Users\\<user>\\.workdir\\config.json`). It is no longer stored next to the binary.
+
 ## Tray behavior
 
 Workdir provides a system tray icon.
@@ -23,6 +25,4 @@ Workdir provides a system tray icon.
 
 ## Multiple Configurations
 
-Workdir can be used multiple times. Create a subfolder each time, which you name `Development` or `Projects`, for example. Copy the application file into these directories. When you start the program, it will check if there is already a configuration there (if not, the program will create it automatically).
-
-Now you can define different commands, independent of the category. For example, opening or updating (git pull) directories with source code, or automatic generation of thumbnails and file conversions.
+Workdir uses one configuration per user profile. Running the binary from different folders uses the same configuration automatically.
