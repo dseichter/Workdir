@@ -16,7 +16,8 @@
 import json
 import os
 
-CONFIGFILE = 'config.json'
+CONFIGFILE = os.path.join(os.path.expanduser('~'), '.workdir', 'config.json')
+os.makedirs(os.path.dirname(CONFIGFILE), exist_ok=True)
 
 
 def _default_command(cmd: str) -> dict:
