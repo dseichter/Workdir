@@ -63,6 +63,24 @@ Workdir uses one configuration per user profile. Running the binary from differe
 
 If you run workdir the first time, the window can be really small. The size will be auto adjusted based on your directories. So please proceed by adding your directories.
 
+## Release packaging checklist (Linux)
+
+This repository publishes Linux artifacts via GitHub Actions:
+
+- AppImage workflow: `.github/workflows/appimage.yml`
+- Flatpak workflow: `.github/workflows/flatpak.yml`
+
+Before creating a release tag, verify:
+
+1. App icon and screenshots are up to date.
+2. AppStream metadata validates: `appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.Workdir.metainfo.xml`
+3. Flatpak manifest matches the current runtime and app behavior.
+4. Workdir starts and executes commands correctly in AppImage and Flatpak builds.
+
+Flathub submission and reviewer notes are documented in:
+
+- `packaging/flatpak/FLATHUB_SUBMISSION.md`
+
 # Contributing 
 
 If you want to contribute by fixing an issue, add a new function or just optimize something, a simple instruction how to start development.

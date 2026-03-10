@@ -46,12 +46,13 @@ modules:
       - install -Dm644 io.github.dseichter.Workdir.png /app/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png
       - install -Dm644 io.github.dseichter.Workdir.metainfo.xml /app/share/metainfo/io.github.dseichter.Workdir.metainfo.xml
     sources:
-      - type: dir
-        path: .
+      - type: git
+        url: https://github.com/dseichter/Workdir.git
+        tag: v2026-03-04
+        commit: a9fdb67188a52e1198c8f2596685a3e9de8cfe71
       - type: file
-        path: packaging/flatpak/io.github.dseichter.Workdir.desktop
+        path: io.github.dseichter.Workdir.desktop
       - type: file
-        path: packaging/flatpak/io.github.dseichter.Workdir.metainfo.xml
+        path: io.github.dseichter.Workdir.metainfo.xml
       - type: file
-        path: icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
-        dest-filename: io.github.dseichter.Workdir.png
+        path: io.github.dseichter.Workdir.png

@@ -9,6 +9,7 @@
   <developer id="io.github.dseichter">
     <name>Daniel Seichter</name>
   </developer>
+  <update_contact>daniel-seichter@users.noreply.github.com</update_contact>
 
   <description>
     <p>
@@ -35,7 +36,15 @@
 
   <content_rating type="oars-1.1"/>
 
+  <provides>
+    <binary>workdir</binary>
+  </provides>
+
   <releases>
-    <release version="2026.2.28" date="2026-02-28"/>
+    <release version="2026.3.4" date="2026-03-04">
+      <description>
+        <p>Maintenance release with packaging improvements and updates.</p>
+      </description>
+    </release>
   </releases>
 </component>
