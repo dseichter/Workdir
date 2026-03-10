@@ -39,7 +39,7 @@ modules:
   - name: workdir
     buildsystem: simple
     build-commands:
-      - python3 -m pip install --no-deps --prefix=/app .
+      - python3 -m pip install --no-deps --no-build-isolation --no-index --prefix=/app .
       - printf '%s\n' '#!/usr/bin/env sh' 'exec python3 -m workdir "$@"' > /app/bin/workdir
       - chmod 0755 /app/bin/workdir
       - install -Dm644 io.github.dseichter.Workdir.desktop /app/share/applications/io.github.dseichter.Workdir.desktop
