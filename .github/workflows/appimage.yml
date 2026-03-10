@@ -59,20 +59,11 @@ jobs:
           mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
 
           install -Dm755 dist/workdir AppDir/usr/bin/workdir
-          install -Dm644 icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png AppDir/usr/share/icons/hicolor/256x256/apps/workdir.png
+          install -Dm644 icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png AppDir/usr/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png
+          install -Dm644 packaging/flatpak/io.github.dseichter.Workdir.desktop AppDir/usr/share/applications/io.github.dseichter.Workdir.desktop
 
-          cat > AppDir/usr/share/applications/workdir.desktop << 'EOF'
-          [Desktop Entry]
-          Type=Application
-          Name=Workdir
-          Exec=workdir
-          Icon=workdir
-          Categories=Utility;Development;
-          Terminal=false
-          EOF
-
-          install -Dm644 AppDir/usr/share/applications/workdir.desktop AppDir/workdir.desktop
-          install -Dm644 AppDir/usr/share/icons/hicolor/256x256/apps/workdir.png AppDir/workdir.png
+          install -Dm644 AppDir/usr/share/applications/io.github.dseichter.Workdir.desktop AppDir/io.github.dseichter.Workdir.desktop
+          install -Dm644 AppDir/usr/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png AppDir/io.github.dseichter.Workdir.png
 
           cat > AppDir/AppRun << 'EOF'
           #!/bin/sh
