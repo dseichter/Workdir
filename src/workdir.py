@@ -360,7 +360,7 @@ class WorkDirFrame(gui.MainFrame):
 
         if self._is_running_in_flatpak():
             # Run user commands on the host from Flatpak sandbox.
-            executecmd = f"flatpak-spawn --host sh -lc {shlex.quote(executecmd)}"
+            executecmd = f"flatpak-spawn --host sh -lc {shlex.quote(executecmd)}"  # NOSONAR
 
         env = os.environ.copy()
 
