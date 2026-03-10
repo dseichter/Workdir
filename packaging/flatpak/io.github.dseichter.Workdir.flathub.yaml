@@ -49,8 +49,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/dseichter/Workdir.git
-        tag: v2026-03-04
-        commit: a9fdb67188a52e1198c8f2596685a3e9de8cfe71
+        tag: v2026-03-10
+        commit: c65c90d05b6b7e5c9927c08e753a4774d5aa8ef4
       - type: file
         path: io.github.dseichter.Workdir.desktop
       - type: file

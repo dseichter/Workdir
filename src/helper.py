@@ -18,7 +18,7 @@ import json
 import logging
 from packaging import version
 
-VERSION = "v2026-03-04"
+VERSION = "v2026-03-10"
 UPDATEURL = 'https://api.github.com/repos/dseichter/Workdir/releases/latest'
 RELEASES = 'https://github.com/dseichter/Workdir/releases'
 NAME = 'Workdir'
