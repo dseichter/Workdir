@@ -48,11 +48,11 @@ modules:
       - install -Dm644 io.github.dseichter.Workdir.metainfo.xml /app/share/metainfo/io.github.dseichter.Workdir.metainfo.xml
     sources:
       - type: dir
-        path: .
+        path: ../..
       - type: file
-        path: packaging/flatpak/io.github.dseichter.Workdir.desktop
+        path: io.github.dseichter.Workdir.desktop
       - type: file
-        path: packaging/flatpak/io.github.dseichter.Workdir.metainfo.xml
+        path: io.github.dseichter.Workdir.metainfo.xml
       - type: file
-        path: icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
+        path: ../../icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
         dest-filename: io.github.dseichter.Workdir.png
