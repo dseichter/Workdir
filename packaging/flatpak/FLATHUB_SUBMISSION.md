@@ -20,7 +20,7 @@ sudo pacman -Syu --needed flatpak flatpak-builder appstream python-pip
 appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.Workdir.metainfo.xml
 
 flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak --user install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
+flatpak --user install -y flathub org.freedesktop.Platform//25.08 org.freedesktop.Sdk//25.08
 
 flatpak-builder --force-clean --repo=repo flatpak-build packaging/flatpak/io.github.dseichter.Workdir.yaml
 flatpak build-bundle repo workdir-test.flatpak io.github.dseichter.Workdir
