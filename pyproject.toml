@@ -23,6 +23,9 @@ dependencies = [
     "packaging>=24.0"
 ]
 
+[project.scripts]
+workdir = "workdir:main"
+
 [project.urls]
 Homepage = "https://github.com/dseichter/Workdir"
 Documentation = "https://github.com/dseichter/Workdir"

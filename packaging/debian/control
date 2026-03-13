@@ -1,0 +1,26 @@
+Source: workdir
+Section: utils
+Priority: optional
+Maintainer: Daniel Seichter <dseichter@github.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-python,
+ python3-all,
+ python3-setuptools,
+ python3-wheel
+Standards-Version: 4.7.0
+Homepage: https://github.com/dseichter/Workdir
+Rules-Requires-Root: no
+
+Package: workdir
+Architecture: all
+Depends:
+ ${python3:Depends},
+ ${misc:Depends},
+ python3-pyside6,
+ python3-urllib3,
+ python3-packaging
+Description: work with multiple directories and run commands
+ Workdir allows you to manage multiple working directories and execute
+ commands across them without navigating manually. It provides a graphical
+ interface built with PySide6 (Qt6).
