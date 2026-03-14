@@ -53,7 +53,7 @@ jobs:
       # dch updates debian/changelog with the new version and current timestamp.
       - name: Update debian/changelog
         env:
-          DEBEMAIL: dseichter@github.com
+          DEBEMAIL: daniel.seichter@dseichter.de
           DEBFULLNAME: Daniel Seichter
         run: |
           cp -r packaging/debian debian/
