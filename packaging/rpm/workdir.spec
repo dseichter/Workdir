@@ -43,9 +43,9 @@ interface built with PySide6 (Qt6).
 %{python3_sitelib}/__pycache__/
 %{python3_sitelib}/*.egg-info/
 %{_bindir}/workdir
-%{_datadir}/applications/io.github.dseichter.Workdir.desktop
-%{_datadir}/metainfo/io.github.dseichter.Workdir.metainfo.xml
-%{_datadir}/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png
+%{_datadir}/applications/io.github.dseichter.workdir.desktop
+%{_datadir}/metainfo/io.github.dseichter.workdir.metainfo.xml
+%{_datadir}/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png
 
 %changelog
 * Mon Mar 10 2026 Daniel Seichter <dseichter@github.com> - 2026.03.10-1

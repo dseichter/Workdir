@@ -15,6 +15,16 @@ jobs:
   build-appimage:
     name: Build AppImage
     runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: Workdir
+      PACKAGE_NAME: workdir
+      WORKSPACE_NAME: Workdir
+      ENTRYPOINT: src/workdir.py
+      ICON_FILE: icons/workdir.ico
+      APPDIR_ICON_SOURCE: icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
+      APP_ID: io.github.dseichter.workdir
+      APP_DISPLAY_NAME: Workdir
+      DESKTOP_FILENAME: io.github.dseichter.workdir.desktop
 
     steps:
       - name: Checkout
@@ -50,7 +60,7 @@ jobs:
 
       - name: Build Linux binary
         run: |
-          pyinstaller --onefile src/workdir.py -n workdir --icon=icons/workdir.ico
+          pyinstaller --onefile "${{ env.ENTRYPOINT }}" -n "${{ env.PACKAGE_NAME }}" --icon="${{ env.ICON_FILE }}"
 
       - name: Prepare AppDir
         run: |
@@ -58,16 +68,25 @@ jobs:
           mkdir -p AppDir/usr/share/applications
           mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
 
-          install -Dm755 dist/workdir AppDir/usr/bin/workdir
-          install -Dm644 icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png AppDir/usr/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png
-          install -Dm644 packaging/flatpak/io.github.dseichter.Workdir.desktop AppDir/usr/share/applications/io.github.dseichter.Workdir.desktop
+          install -Dm755 "dist/${{ env.PACKAGE_NAME }}" "AppDir/usr/bin/${{ env.PACKAGE_NAME }}"
+          install -Dm644 "${{ env.APPDIR_ICON_SOURCE }}" "AppDir/usr/share/icons/hicolor/256x256/apps/${{ env.APP_ID }}.png"
 
-          install -Dm644 AppDir/usr/share/applications/io.github.dseichter.Workdir.desktop AppDir/io.github.dseichter.Workdir.desktop
-          install -Dm644 AppDir/usr/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png AppDir/io.github.dseichter.Workdir.png
+          cat > "AppDir/usr/share/applications/${{ env.DESKTOP_FILENAME }}" << EOF
+          [Desktop Entry]
+          Type=Application
+          Name=${{ env.APP_DISPLAY_NAME }}
+          Exec=${{ env.PACKAGE_NAME }}
+          Icon=${{ env.APP_ID }}
+          Categories=Utility;Development;
+          Terminal=false
+          EOF
+
+          install -Dm644 "AppDir/usr/share/applications/${{ env.DESKTOP_FILENAME }}" "AppDir/${{ env.DESKTOP_FILENAME }}"
+          install -Dm644 "AppDir/usr/share/icons/hicolor/256x256/apps/${{ env.APP_ID }}.png" "AppDir/${{ env.APP_ID }}.png"
 
           cat > AppDir/AppRun << 'EOF'
           #!/bin/sh
-          exec "$APPDIR/usr/bin/workdir" "$@"
+          exec "$APPDIR/usr/bin/${{ env.PACKAGE_NAME }}" "$@"
           EOF
           chmod +x AppDir/AppRun
 
@@ -77,16 +96,16 @@ jobs:
         run: |
           wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
           chmod +x appimagetool-x86_64.AppImage
-          ARCH=x86_64 ./appimagetool-x86_64.AppImage AppDir "workdir-appimage-${RELEASE_TAG}-x86_64.AppImage"
+          ARCH=x86_64 ./appimagetool-x86_64.AppImage AppDir "${{ env.PACKAGE_NAME }}-appimage-${RELEASE_TAG}-x86_64.AppImage"
 
       - name: Upload AppImage artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64
-          path: workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage
+          name: ${{ env.PACKAGE_NAME }}-appimage-${{ steps.vars.outputs.tag }}-x86_64
+          path: ${{ env.PACKAGE_NAME }}-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage
 
       - name: Upload AppImage to Release
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
         with:
           tag_name: ${{ steps.vars.outputs.tag }}
-          files: workdir-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage
+          files: ${{ env.PACKAGE_NAME }}-appimage-${{ steps.vars.outputs.tag }}-x86_64.AppImage

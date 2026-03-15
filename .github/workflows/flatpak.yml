@@ -43,7 +43,7 @@ jobs:
 
       - name: Validate AppStream metadata
         run: |
-          appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.Workdir.metainfo.xml
+          appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.workdir.metainfo.xml
 
       - name: Install Flatpak runtime
         run: |
@@ -54,8 +54,8 @@ jobs:
         env:
           RELEASE_TAG: ${{ steps.vars.outputs.tag }}
         run: |
-          flatpak-builder --user --force-clean --repo=repo flatpak-build packaging/flatpak/io.github.dseichter.Workdir.yaml
-          flatpak build-bundle repo "workdir-flatpak-${RELEASE_TAG}-x86_64.flatpak" io.github.dseichter.Workdir
+          flatpak-builder --user --force-clean --repo=repo flatpak-build packaging/flatpak/io.github.dseichter.workdir.yaml
+          flatpak build-bundle repo "workdir-flatpak-${RELEASE_TAG}-x86_64.flatpak" io.github.dseichter.workdir
 
       - name: Upload Flatpak artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0

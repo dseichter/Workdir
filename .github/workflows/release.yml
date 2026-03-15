@@ -4,11 +4,18 @@ on:
   push:
     tags:
       - 'v*'
+
   workflow_dispatch:
 
 jobs:
-  build-windows-binary:
+  build-windows:
     runs-on: windows-latest
+    env:
+      PROJECT_NAME: Workdir
+      PACKAGE_NAME: workdir
+      WORKSPACE_NAME: Workdir
+      ENTRYPOINT: src/workdir.py
+      ICON_FILE: icons/workdir.ico
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -22,22 +29,33 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install -r src/requirements.txt
 
       - name: Build Windows binary
-        run: pyinstaller --onefile -w src/workdir.py -n workdir-windows-${{ github.ref_name }}.exe --icon=icons/workdir.ico
+        run: |
+          pyinstaller --onefile "${{ env.ENTRYPOINT }}" -n "${{ env.PACKAGE_NAME }}.exe" --icon="${{ env.ICON_FILE }}"
+          move "dist\${{ env.PACKAGE_NAME }}.exe" "${{ env.PACKAGE_NAME }}-${{ github.ref_name }}.exe"
+        shell: powershell
 
       - name: Upload artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: workdir-windows-${{ github.ref_name }}.exe
-          path: dist/workdir-windows-${{ github.ref_name }}.exe
+          name: ${{ env.PACKAGE_NAME }}-${{ github.ref_name }}.exe
+          path: ${{ env.PACKAGE_NAME }}-${{ github.ref_name }}.exe
 
-  build-linux-binary:
+  build-linux:
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+    env:
+      PROJECT_NAME: Workdir
+      PACKAGE_NAME: workdir
+      WORKSPACE_NAME: Workdir
+      ENTRYPOINT: src/workdir.py
+      ICON_FILE: icons/workdir.ico
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install build-essential libgtk-3-dev
+        run: apt update && apt-get install build-essential libgtk-3-dev python3-venv python3-pip wget xz-utils libxcb-xinerama0 libxcb-cursor0 libxkbcommon-x11-0 -y
 
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
@@ -48,17 +66,24 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install -r src/requirements.txt
 
       - name: Build Linux binary
-        run: pyinstaller --onefile src/workdir.py -n workdir-linux-${{ github.ref_name }} --icon=icons/workdir.ico
+        run: |
+          pyinstaller --onefile "${{ env.ENTRYPOINT }}" -n "${{ env.PACKAGE_NAME }}" --icon="${{ env.ICON_FILE }}"
+          mv "dist/${{ env.PACKAGE_NAME }}" "${{ env.PACKAGE_NAME }}-ubuntu-24-04-${{ github.ref_name }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+
         with:
-          name: workdir-linux-${{ github.ref_name }}
-          path: dist/workdir-linux-${{ github.ref_name }}
+          name: ${{ env.PACKAGE_NAME }}-ubuntu-24-04-${{ github.ref_name }}
+          path: ${{ env.PACKAGE_NAME }}-ubuntu-24-04-${{ github.ref_name }}
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [build-windows-binary, build-linux-binary]
+    needs: [build-windows, build-linux]
+    env:
+      PROJECT_NAME: Workdir
+      PACKAGE_NAME: workdir
+      WORKSPACE_NAME: Workdir
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -67,11 +92,13 @@ jobs:
 
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: workdir-linux-${{ github.ref_name }}
+          name: ${{ env.PACKAGE_NAME }}-ubuntu-24-04-${{ github.ref_name }}
+          path: .
 
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: workdir-windows-${{ github.ref_name }}.exe
+          name: ${{ env.PACKAGE_NAME }}-${{ github.ref_name }}.exe
+          path: .
 
       - name: Generate Release Notes
         id: release_notes
@@ -132,5 +159,6 @@ jobs:
           draft: false
           prerelease: ${{ contains(github.ref_name, 'rc') || contains(github.ref_name, 'beta') }}
           files: |
-            workdir-linux-${{ github.ref_name }}
-            workdir-windows-${{ github.ref_name }}.exe
+            ${{ env.PACKAGE_NAME }}-ubuntu-24-04-${{ github.ref_name }}
+            ${{ env.PACKAGE_NAME }}-${{ github.ref_name }}.exe
+
