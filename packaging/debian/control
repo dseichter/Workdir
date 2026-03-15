@@ -1,7 +1,7 @@
 Source: workdir
 Section: utils
 Priority: optional
-Maintainer: Daniel Seichter <dseichter@github.com>
+Maintainer: Daniel Seichter <daniel.seichter@dseichter.de>
 Build-Depends:
  debhelper-compat (= 13),
  dh-python,

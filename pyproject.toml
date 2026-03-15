@@ -8,7 +8,7 @@ version = "2026.3.10"
 description = "Work with multiple directories and run commands without navigating manually."
 readme = "README.md"
 authors = [
-    { name = "Daniel Seichter" }
+    { name = "Daniel Seichter", email = "daniel.seichter@dseichter.de" }
 ]
 license = { file = "LICENSE" }
 requires-python = ">=3.12"
