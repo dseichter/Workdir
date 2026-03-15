@@ -5,6 +5,9 @@
 The `packaging/debian/` directory contains the standard Debian packaging metadata.  
 It produces a binary `.deb` for Debian, Ubuntu, and all their derivatives.
 
+Desktop integration files for Workdir are installed via `pyproject.toml` data files,
+so this package does not need a separate `workdir.install` file.
+
 ### Version strategy
 
 The version in `debian/changelog` is **updated automatically by the CI workflow** on each release.  
@@ -82,6 +85,7 @@ sudo apt-get install debhelper dh-python python3-all python3-setuptools devscrip
 
 # From the repo root: copy debian/ metadata into place and build
 cp -r packaging/debian debian/
+chmod +x debian/rules
 dpkg-buildpackage -b -us -uc
 
 # The .deb appears in the parent directory
