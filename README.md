@@ -73,7 +73,7 @@ This repository publishes Linux artifacts via GitHub Actions:
 Before creating a release tag, verify:
 
 1. App icon and screenshots are up to date.
-2. AppStream metadata validates: `appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.Workdir.metainfo.xml`
+2. AppStream metadata validates: `appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.workdir.metainfo.xml`
 3. Flatpak manifest matches the current runtime and app behavior.
 4. Workdir starts and executes commands correctly in AppImage and Flatpak builds.
 

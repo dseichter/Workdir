@@ -1,4 +1,4 @@
-app-id: io.github.dseichter.Workdir
+app-id: io.github.dseichter.workdir
 runtime: org.kde.Platform
 runtime-version: "6.10"
 sdk: org.kde.Sdk
@@ -33,16 +33,16 @@ modules:
       - python3 -m pip install --no-deps --no-build-isolation --no-index --prefix=/app .
       - printf '%s\n' '#!/usr/bin/env sh' 'exec python3 -m workdir "$@"' > /app/bin/workdir
       - chmod 0755 /app/bin/workdir
-      - install -Dm644 io.github.dseichter.Workdir.desktop /app/share/applications/io.github.dseichter.Workdir.desktop
-      - install -Dm644 io.github.dseichter.Workdir.png /app/share/icons/hicolor/256x256/apps/io.github.dseichter.Workdir.png
-      - install -Dm644 io.github.dseichter.Workdir.metainfo.xml /app/share/metainfo/io.github.dseichter.Workdir.metainfo.xml
+      - install -Dm644 io.github.dseichter.workdir.desktop /app/share/applications/io.github.dseichter.workdir.desktop
+      - install -Dm644 io.github.dseichter.workdir.png /app/share/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png
+      - install -Dm644 io.github.dseichter.workdir.metainfo.xml /app/share/metainfo/io.github.dseichter.workdir.metainfo.xml
     sources:
       - type: dir
         path: ../..
       - type: file
-        path: io.github.dseichter.Workdir.desktop
+        path: io.github.dseichter.workdir.desktop
       - type: file
-        path: io.github.dseichter.Workdir.metainfo.xml
+        path: io.github.dseichter.workdir.metainfo.xml
       - type: file
         path: ../../icons/folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48.png
-        dest-filename: io.github.dseichter.Workdir.png
+        dest-filename: io.github.dseichter.workdir.png

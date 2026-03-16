@@ -8,7 +8,7 @@ version = "2026.3.10"
 description = "Work with multiple directories and run commands without navigating manually."
 readme = "README.md"
 authors = [
-    { name = "Daniel Seichter" }
+    { name = "Daniel Seichter", email = "daniel.seichter@dseichter.de" }
 ]
 license = { file = "LICENSE" }
 requires-python = ">=3.12"
@@ -22,6 +22,9 @@ dependencies = [
     "urllib3>=2.6.3",
     "packaging>=24.0"
 ]
+
+[project.scripts]
+workdir = "workdir:main"
 
 [project.urls]
 Homepage = "https://github.com/dseichter/Workdir"
@@ -44,6 +47,6 @@ py-modules = [
 "" = "src"
 
 [tool.setuptools.data-files]
-"share/applications" = ["data/io.github.dseichter.Workdir.desktop"]
-"share/metainfo" = ["data/io.github.dseichter.Workdir.metainfo.xml"]
-"share/icons/hicolor/256x256/apps" = ["data/io.github.dseichter.Workdir.png"]
+"share/applications" = ["data/io.github.dseichter.workdir.desktop"]
+"share/metainfo" = ["data/io.github.dseichter.workdir.metainfo.xml"]
+"share/icons/hicolor/256x256/apps" = ["data/io.github.dseichter.workdir.png"]
