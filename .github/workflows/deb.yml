@@ -19,7 +19,7 @@ jobs:
       PACKAGE_NAME: workdir
       WORKSPACE_NAME: Workdir
       DEBIAN_SOURCE_DIR: packaging/debian
-      DEB_ARTIFACT_GLOB: ../*.deb
+      DEB_ARTIFACT_GLOB: "*.deb"
     steps:
       - name: Resolve release tag
         id: vars
@@ -53,8 +53,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            build-essential debhelper dh-python python3-all \
-            python3-setuptools python3-wheel devscripts fakeroot
+            build-essential debhelper dh-python pybuild-plugin-pyproject \
+            python3-all python3-setuptools python3-wheel devscripts fakeroot
 
       - name: Update debian/changelog
         env:
@@ -68,7 +68,9 @@ jobs:
               "New upstream release ${{ steps.vars.outputs.tag }}."
 
       - name: Build binary .deb
-        run: dpkg-buildpackage -b -us -uc -rfakeroot
+        run: |
+          dpkg-buildpackage -b -us -uc -rfakeroot
+          find .. -maxdepth 1 -name "*.deb" -exec cp {} . \;
 
       - name: Collect .deb artifact
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
