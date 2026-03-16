@@ -1,6 +1,6 @@
 # The version field is updated automatically by the CI workflow.
 # Tag format: v2026-03-10 → Version: 2026.03.10
-# The macro %{tagver} converts dots back to dashes to reconstruct the git tag.
+# The macro %%{tagver} converts dots back to dashes to reconstruct the git tag.
 %global tagver %(echo %{version} | tr '.' '-')
 
 Name:           workdir
@@ -43,13 +43,12 @@ python3 -m installer --destdir=%{buildroot} dist/*.whl
 %doc README.md
 %{python3_sitelib}/*.py
 %{python3_sitelib}/__pycache__/
-%{python3_sitelib}/yahac-*.dist-info/
-%{python3_sitelib}/*.egg-info/
+%{python3_sitelib}/Workdir-*.dist-info/
 %{_bindir}/workdir
 %{_datadir}/applications/io.github.dseichter.workdir.desktop
 %{_datadir}/metainfo/io.github.dseichter.workdir.metainfo.xml
 %{_datadir}/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png
 
 %changelog
-* Mon Mar 10 2026 Daniel Seichter <dseichter@github.com> - 2026.03.10-1
+* Tue Mar 10 2026 Daniel Seichter <dseichter@github.com> - 2026.03.10-1
 - Initial release.
