@@ -33,11 +33,12 @@ The first time, clone the (empty) AUR repo for your package name:
 git clone ssh://aur@aur.archlinux.org/workdir.git aur-workdir
 cp packaging/aur/PKGBUILD aur-workdir/
 cd aur-workdir
+git switch -c master
 # Generate .SRCINFO (required by AUR)
 makepkg --printsrcinfo > .SRCINFO
 git add PKGBUILD .SRCINFO
 git commit -m "Initial release"
-git push
+git push -u origin master
 ```
 
 ### 4. Configure GitHub Actions secrets
