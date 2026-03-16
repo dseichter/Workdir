@@ -16,6 +16,8 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-wheel
+BuildRequires:  python3-build
+BuildRequires:  python3-installer
 
 Requires:       python3 >= 3.12
 Requires:       python3-pyside6
@@ -31,16 +33,17 @@ interface built with PySide6 (Qt6).
 %autosetup -n Workdir-%{tagver}
 
 %build
-%py3_build
+python3 -m build --wheel --no-isolation
 
 %install
-%py3_install
+python3 -m installer --destdir=%{buildroot} dist/*.whl
 
 %files
 %license LICENSE
 %doc README.md
 %{python3_sitelib}/*.py
 %{python3_sitelib}/__pycache__/
+%{python3_sitelib}/yahac-*.dist-info/
 %{python3_sitelib}/*.egg-info/
 %{_bindir}/workdir
 %{_datadir}/applications/io.github.dseichter.workdir.desktop

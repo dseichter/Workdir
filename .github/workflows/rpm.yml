@@ -33,7 +33,7 @@ jobs:
             TAG="$INPUT_RELEASE_TAG"
           fi
           if [ -z "$TAG" ] || [[ ! "$TAG" =~ ^v[0-9A-Za-z._-]+$ ]]; then
-            echo "A valid tag (e.g. v0.5.0) is required." >&2
+            echo "A valid tag (e.g. v2026-03-15) is required." >&2
             exit 1
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
@@ -54,7 +54,8 @@ jobs:
         run: |
           dnf install -y \
             rpm-build python3-devel python3-setuptools \
-            python3-wheel rpmdevtools curl
+            python3-wheel python3-build python3-installer \
+            rpmdevtools curl
 
       - name: Set up RPM build tree
         run: rpmdev-setuptree
