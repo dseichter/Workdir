@@ -31,7 +31,7 @@ jobs:
             TAG="$INPUT_RELEASE_TAG"
           fi
           if [ -z "$TAG" ] || [[ ! "$TAG" =~ ^v[0-9A-Za-z._-]+$ ]]; then
-            echo "A valid tag (e.g. v0.5.0) is required." >&2
+            echo "A valid tag (e.g. v2026-03-15) is required." >&2
             exit 1
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
@@ -51,7 +51,7 @@ jobs:
       - name: Compute source tarball sha256sum
         id: checksum
         run: |
-          URL="https://github.com/${{ github.repository_owner }}/${{ env.PROJECT_NAME }}/archive/refs/tags/${{ steps.vars.outputs.tag }}.tar.gz"
+          URL="https://github.com/${{ github.repository }}/archive/${{ steps.vars.outputs.tag }}.tar.gz"
           SHA256=$(curl -fsSL "$URL" | sha256sum | cut -d' ' -f1)
           echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
 
