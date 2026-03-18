@@ -22,8 +22,6 @@ build() {
 package() {
     cd "Workdir-${pkgver//./-}"
     python -m installer --destdir="$pkgdir" dist/*.whl
-    install -Dm755 src/workdir.py "$pkgdir/usr/bin/workdir"
-    install -Dm644 data/io.github.dseichter.workdir.desktop "$pkgdir/usr/share/applications/io.github.dseichter.workdir.desktop"
     install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
     install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
