@@ -16,8 +16,7 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-wheel
-BuildRequires:  python3-build
-BuildRequires:  python3-installer
+BuildRequires:  python3-pip
 
 Requires:       python3 >= 3.12
 Requires:       python3-pyside6
@@ -33,10 +32,10 @@ interface built with PySide6 (Qt6).
 %autosetup -n Workdir-%{tagver}
 
 %build
-python3 -m build --wheel --no-isolation
+echo "Build phase not needed - pip install will handle it"
 
 %install
-python3 -m installer --destdir=%{buildroot} dist/*.whl
+python3 -m pip install --no-build-isolation --root=%{buildroot} --no-cache-dir .
 
 %files
 %license LICENSE
