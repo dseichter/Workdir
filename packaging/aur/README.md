@@ -4,6 +4,11 @@
 
 The `PKGBUILD` in this directory defines the Arch Linux User Repository (AUR) package for Workdir (`workdir-bin`).
 
+## Package variants
+
+- `workdir` (source): builds from source and uses Arch/Python system dependencies.
+- `workdir-bin` (binary): installs prebuilt release binaries and is recommended for faster installs and minimal build dependencies.
+
 ### Version strategy
 
 The `pkgver` field is **automatically derived from the git tag** by the CI workflow.  
