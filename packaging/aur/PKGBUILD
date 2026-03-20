@@ -9,7 +9,7 @@ license=('GPL-3.0-only')
 options=('!debug')
 depends=('glibc')
 source=(
-    "workdir::https://github.com/dseichter/Workdir/releases/download/v${pkgver//./-}/workdir-ubuntu-24-04-v${pkgver//./-}"
+    "workdir::https://github.com/dseichter/Workdir/releases/download/v${pkgver//./-}/workdir-linux-x86_64-v${pkgver//./-}"
     "io.github.dseichter.workdir.desktop::https://raw.githubusercontent.com/dseichter/Workdir/v${pkgver//./-}/data/io.github.dseichter.workdir.desktop"
     "io.github.dseichter.workdir.png::https://raw.githubusercontent.com/dseichter/Workdir/v${pkgver//./-}/data/io.github.dseichter.workdir.png"
 )
