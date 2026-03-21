@@ -2,6 +2,26 @@
 
 Download the [latest release](https://github.com/dseichter/Workdir/releases) into a destination folder of your choice and start the program.
 
+## Linux Package Installation (Recommended)
+
+```bash
+# Debian/Ubuntu/Mint - installs dependencies automatically
+sudo apt install ./workdir_*.deb
+
+# Arch/Manjaro (AUR)
+yay -S workdir-bin
+
+# Fedora/openSUSE/RHEL (RPM-based)
+sudo rpm -i workdir-*.rpm
+```
+
+## Flatpak
+
+```bash
+flatpak install flathub io.github.dseichter.workdir
+flatpak run io.github.dseichter.workdir
+```
+
 Via the configuration (menu Extras) you can specify your directories and store up to six commands.
 
 ![Workdir - Configuration](assets/screenshots/configuration.png)

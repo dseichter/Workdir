@@ -39,6 +39,26 @@ You can *theoretically* specify an unlimited number of directories. Up to six in
 
 Download the [latest release](https://github.com/dseichter/Workdir/releases) into a destination folder of your choice and start the program. Via the configuration (menu Extras) you can specify your directories and store up to six commands.
 
+### Linux Package Installation (Recommended)
+
+```bash
+# Debian/Ubuntu/Mint - installs dependencies automatically
+sudo apt install ./workdir_*.deb
+
+# Arch/Manjaro (AUR)
+yay -S workdir-bin
+
+# Fedora/openSUSE/RHEL (RPM-based)
+sudo rpm -i workdir-*.rpm
+```
+
+### Flatpak
+
+```bash
+flatpak install flathub io.github.dseichter.workdir
+flatpak run io.github.dseichter.workdir
+```
+
 ![Workdir - Configuration](docs/docs/assets/screenshots/configuration.png "Workdir - Configuration")
 
 Please note that in the current version you can only specify the directory itself as a placeholder. The examples for CMD and Windows Explorer should help you to implement your own calls. Once you click Save, the commands and directories are immediately available in the Directories tab.
@@ -67,6 +87,10 @@ If you run workdir the first time, the window can be really small. The size will
 
 This repository publishes Linux artifacts via GitHub Actions:
 
+- Binary release workflow: `.github/workflows/release.yml`
+- AUR publish workflow: `.github/workflows/aur.yml`
+- Debian package workflow: `.github/workflows/deb.yml`
+- RPM package workflow: `.github/workflows/rpm.yml`
 - AppImage workflow: `.github/workflows/appimage.yml`
 - Flatpak workflow: `.github/workflows/flatpak.yml`
 
@@ -74,8 +98,10 @@ Before creating a release tag, verify:
 
 1. App icon and screenshots are up to date.
 2. AppStream metadata validates: `appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.workdir.metainfo.xml`
-3. Flatpak manifest matches the current runtime and app behavior.
-4. Workdir starts and executes commands correctly in AppImage and Flatpak builds.
+3. `workdir-bin` AUR metadata points to the latest `workdir-archlinux-x86_64-v<tag>` release asset.
+4. Debian and RPM source packaging workflows run successfully for the target tag.
+5. Flatpak manifest matches the current runtime and app behavior.
+6. Workdir starts and executes commands correctly in binary, AppImage, and Flatpak builds.
 
 Flathub submission and reviewer notes are documented in:
 

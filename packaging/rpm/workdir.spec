@@ -46,7 +46,8 @@ python3 -m pip install --no-deps --no-build-isolation --root=%{buildroot} dist/*
 %{_bindir}/workdir
 %{_datadir}/applications/io.github.dseichter.workdir.desktop
 %{_datadir}/metainfo/io.github.dseichter.workdir.metainfo.xml
-%{_datadir}/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png
+%{_datadir}/icons/hicolor/48x48/apps/io.github.dseichter.workdir.png
+%{_datadir}/pixmaps/io.github.dseichter.workdir.png
 
 %changelog
 * Tue Mar 10 2026 Daniel Seichter <dseichter@github.com> - 2026.03.10-1

@@ -9,7 +9,7 @@ Workdir helps you work with multiple directories and run commands without manual
 
 ![Workdir](assets/screenshots/workdir.png)
 
-Binaries for Windows and Linux are available (see [releases](https://github.com/dseichter/Workdir/releases)).
+Binaries for Windows and Linux are available (see [releases](https://github.com/dseichter/Workdir/releases)). Linux users can also install native packages (`.deb`, `.rpm`, AUR `workdir-bin`) and Flatpak.
 
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dseichter/Workdir/total)](https://github.com/dseichter/Workdir/releases)
 ![GitHub License](https://img.shields.io/github/license/dseichter/Workdir)

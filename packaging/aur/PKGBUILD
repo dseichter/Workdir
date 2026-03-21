@@ -20,5 +20,6 @@ sha256sums=('SKIP' 'SKIP' 'SKIP')
 package() {
     install -Dm755 "workdir" "$pkgdir/usr/bin/workdir"
     install -Dm644 "io.github.dseichter.workdir.desktop" "$pkgdir/usr/share/applications/io.github.dseichter.workdir.desktop"
-    install -Dm644 "io.github.dseichter.workdir.png" "$pkgdir/usr/share/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png"
+    install -Dm644 "io.github.dseichter.workdir.png" "$pkgdir/usr/share/icons/hicolor/48x48/apps/io.github.dseichter.workdir.png"
+    install -Dm644 "io.github.dseichter.workdir.png" "$pkgdir/usr/share/pixmaps/io.github.dseichter.workdir.png"
 }

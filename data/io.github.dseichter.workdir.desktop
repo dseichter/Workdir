@@ -8,3 +8,4 @@ Categories=Utility;Development;
 Keywords=directory;commands;launcher;terminal;
 Terminal=false
 StartupNotify=true
+StartupWMClass=workdir

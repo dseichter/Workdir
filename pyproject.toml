@@ -49,4 +49,5 @@ py-modules = [
 [tool.setuptools.data-files]
 "share/applications" = ["data/io.github.dseichter.workdir.desktop"]
 "share/metainfo" = ["data/io.github.dseichter.workdir.metainfo.xml"]
-"share/icons/hicolor/256x256/apps" = ["data/io.github.dseichter.workdir.png"]
+"share/icons/hicolor/48x48/apps" = ["data/io.github.dseichter.workdir.png"]
+"share/pixmaps" = ["data/io.github.dseichter.workdir.png"]
