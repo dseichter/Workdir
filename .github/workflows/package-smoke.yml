@@ -224,10 +224,11 @@ jobs:
         run: |
           cp "${{ env.SPEC_FILE }}" ~/rpmbuild/SPECS/
           rpmbuild -bb ~/rpmbuild/SPECS/workdir.spec
+          find ~/rpmbuild/RPMS -name '*.rpm' -exec cp {} . \;
 
       - name: Assert RPM launcher entrypoint
         run: |
-          RPM_FILE=$(find /github/home/rpmbuild/RPMS -name '*.rpm' | head -n 1)
+          RPM_FILE=$(ls -1t ./*.rpm | head -n 1)
           FIRST_LINE=$(rpm2cpio "$RPM_FILE" | cpio -iv --to-stdout './usr/bin/workdir' 2>/dev/null | head -n 1)
           if [ -z "$FIRST_LINE" ]; then
             FIRST_LINE=$(rpm2cpio "$RPM_FILE" | cpio -iv --to-stdout 'usr/bin/workdir' 2>/dev/null | head -n 1)
@@ -239,7 +240,7 @@ jobs:
 
       - name: Assert RPM desktop assets
         run: |
-          RPM_FILE=$(find /github/home/rpmbuild/RPMS -name '*.rpm' | head -n 1)
+          RPM_FILE=$(ls -1t ./*.rpm | head -n 1)
           rpm2cpio "$RPM_FILE" | cpio -it 2>/dev/null | grep -Eq '^\./?usr/share/applications/io.github.dseichter.workdir.desktop$'
           rpm2cpio "$RPM_FILE" | cpio -it 2>/dev/null | grep -Eq '^\./?usr/share/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png$'
           DESKTOP_CONTENT=$(rpm2cpio "$RPM_FILE" | cpio -iv --to-stdout './usr/share/applications/io.github.dseichter.workdir.desktop' 2>/dev/null | cat)
@@ -255,5 +256,5 @@ jobs:
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: rpm-package-${{ needs.resolve-ref.outputs.artifact_label }}
-          path: /github/home/rpmbuild/RPMS/**/*.rpm
+          path: '*.rpm'
           if-no-files-found: error
