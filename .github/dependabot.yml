@@ -19,3 +19,8 @@ updates:
     directory: "/icons"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "pip"
+    directory: "/docs"
+    schedule:
+      interval: "weekly"
