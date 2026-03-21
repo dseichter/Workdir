@@ -173,7 +173,7 @@ jobs:
         run: |
           DEB_FILE=$(ls -1t ./*.deb | head -n 1)
           dpkg-deb --fsys-tarfile "$DEB_FILE" | tar -tf - | grep -Eq '^\./?usr/share/applications/io.github.dseichter.workdir.desktop$'
-          dpkg-deb --fsys-tarfile "$DEB_FILE" | tar -tf - | grep -Eq '^\./?usr/share/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png$'
+          dpkg-deb --fsys-tarfile "$DEB_FILE" | tar -tf - | grep -Eq '^\./?usr/share/icons/hicolor/48x48/apps/io.github.dseichter.workdir.png$'
           DESKTOP_CONTENT=$(dpkg-deb --fsys-tarfile "$DEB_FILE" | tar -xOf - ./usr/share/applications/io.github.dseichter.workdir.desktop 2>/dev/null || true)
           if [ -z "$DESKTOP_CONTENT" ]; then
             DESKTOP_CONTENT=$(dpkg-deb --fsys-tarfile "$DEB_FILE" | tar -xOf - usr/share/applications/io.github.dseichter.workdir.desktop 2>/dev/null)
@@ -242,7 +242,7 @@ jobs:
         run: |
           RPM_FILE=$(ls -1t ./*.rpm | head -n 1)
           rpm2cpio "$RPM_FILE" | cpio -it 2>/dev/null | grep -Eq '^\./?usr/share/applications/io.github.dseichter.workdir.desktop$'
-          rpm2cpio "$RPM_FILE" | cpio -it 2>/dev/null | grep -Eq '^\./?usr/share/icons/hicolor/256x256/apps/io.github.dseichter.workdir.png$'
+          rpm2cpio "$RPM_FILE" | cpio -it 2>/dev/null | grep -Eq '^\./?usr/share/icons/hicolor/48x48/apps/io.github.dseichter.workdir.png$'
           DESKTOP_CONTENT=$(rpm2cpio "$RPM_FILE" | cpio -iv --to-stdout './usr/share/applications/io.github.dseichter.workdir.desktop' 2>/dev/null | cat)
           if [ -z "$DESKTOP_CONTENT" ]; then
             DESKTOP_CONTENT=$(rpm2cpio "$RPM_FILE" | cpio -iv --to-stdout 'usr/share/applications/io.github.dseichter.workdir.desktop' 2>/dev/null | cat)
