@@ -88,11 +88,14 @@ If you run workdir the first time, the window can be really small. The size will
 This repository publishes Linux artifacts via GitHub Actions:
 
 - Binary release workflow: `.github/workflows/release.yml`
+- Release orchestrator: `.github/workflows/release-orchestrator.yml`
 - AUR publish workflow: `.github/workflows/aur.yml`
 - Debian package workflow: `.github/workflows/deb.yml`
 - RPM package workflow: `.github/workflows/rpm.yml`
 - AppImage workflow: `.github/workflows/appimage.yml`
 - Flatpak workflow: `.github/workflows/flatpak.yml`
+
+For an AUR packaging-only hotfix of an existing release, run `.github/workflows/release-orchestrator.yml` manually with `publish_mode=aur-hotfix`, the existing `release_tag`, and an incremented `aur_pkgrel` such as `2`.
 
 Before creating a release tag, verify:
 
