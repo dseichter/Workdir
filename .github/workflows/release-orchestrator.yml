@@ -85,7 +85,6 @@ jobs:
     uses: ./.github/workflows/release.yml
     with:
       release_tag: ${{ needs.resolve-release-tag.outputs.tag }}
-    secrets: inherit
 
   publish-aur-source:
     needs: [resolve-release-tag, smoke]
@@ -93,7 +92,8 @@ jobs:
     uses: ./.github/workflows/aur-source.yml
     with:
       release_tag: ${{ needs.resolve-release-tag.outputs.tag }}
-    secrets: inherit
+    secrets:
+      AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
 
   publish-aur-bin:
     needs: [resolve-release-tag, smoke, release]
@@ -102,7 +102,8 @@ jobs:
     with:
       release_tag: ${{ needs.resolve-release-tag.outputs.tag }}
       pkgrel: ${{ needs.resolve-release-tag.outputs.aur_pkgrel }}
-    secrets: inherit
+    secrets:
+      AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
 
   build-deb:
     needs: [resolve-release-tag, smoke, release]
@@ -110,7 +111,6 @@ jobs:
     uses: ./.github/workflows/deb.yml
     with:
       release_tag: ${{ needs.resolve-release-tag.outputs.tag }}
-    secrets: inherit
 
   build-rpm:
     needs: [resolve-release-tag, smoke, release]
@@ -118,7 +118,6 @@ jobs:
     uses: ./.github/workflows/rpm.yml
     with:
       release_tag: ${{ needs.resolve-release-tag.outputs.tag }}
-    secrets: inherit
 
   build-appimage:
     needs: [resolve-release-tag, smoke, release]
@@ -126,4 +125,3 @@ jobs:
     uses: ./.github/workflows/appimage.yml
     with:
       release_tag: ${{ needs.resolve-release-tag.outputs.tag }}
-    secrets: inherit
