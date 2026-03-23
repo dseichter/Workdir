@@ -10,8 +10,8 @@ options=('!debug')
 depends=('glibc')
 source=(
     "workdir-v${pkgver//./-}::https://github.com/dseichter/Workdir/releases/download/v${pkgver//./-}/workdir-archlinux-x86_64-v${pkgver//./-}"
-    "io.github.dseichter.workdir-v${pkgver//./-}.desktop::https://raw.githubusercontent.com/dseichter/Workdir/v${pkgver//./-}/data/io.github.dseichter.workdir.desktop"
-    "io.github.dseichter.workdir-v${pkgver//./-}.png::https://raw.githubusercontent.com/dseichter/Workdir/v${pkgver//./-}/data/io.github.dseichter.workdir.png"
+    "io.github.dseichter.workdir-v${pkgver//./-}.desktop::https://raw.githubusercontent.com/dseichter/Workdir/v${pkgver//./-}/packaging/debian/io.github.dseichter.workdir.desktop"
+    "io.github.dseichter.workdir-v${pkgver//./-}.png::https://raw.githubusercontent.com/dseichter/Workdir/v${pkgver//./-}/icons/io.github.dseichter.workdir.png"
 )
 
 # sha256sums is replaced by the CI workflow on each release.

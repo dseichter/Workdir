@@ -52,13 +52,6 @@ yay -S workdir-bin
 sudo rpm -i workdir-*.rpm
 ```
 
-### Flatpak
-
-```bash
-flatpak install flathub io.github.dseichter.workdir
-flatpak run io.github.dseichter.workdir
-```
-
 ![Workdir - Configuration](docs/docs/assets/screenshots/configuration.png "Workdir - Configuration")
 
 Please note that in the current version you can only specify the directory itself as a placeholder. The examples for CMD and Windows Explorer should help you to implement your own calls. Once you click Save, the commands and directories are immediately available in the Directories tab.
@@ -93,22 +86,15 @@ This repository publishes Linux artifacts via GitHub Actions:
 - Debian package workflow: `.github/workflows/deb.yml`
 - RPM package workflow: `.github/workflows/rpm.yml`
 - AppImage workflow: `.github/workflows/appimage.yml`
-- Flatpak workflow: `.github/workflows/flatpak.yml`
 
 For an AUR packaging-only hotfix of an existing release, run `.github/workflows/release-orchestrator.yml` manually with `publish_mode=aur-hotfix`, the existing `release_tag`, and an incremented `aur_pkgrel` such as `2`.
 
 Before creating a release tag, verify:
 
 1. App icon and screenshots are up to date.
-2. AppStream metadata validates: `appstreamcli validate --no-net packaging/flatpak/io.github.dseichter.workdir.metainfo.xml`
-3. `workdir-bin` AUR metadata points to the latest `workdir-archlinux-x86_64-v<tag>` release asset.
-4. Debian and RPM source packaging workflows run successfully for the target tag.
-5. Flatpak manifest matches the current runtime and app behavior.
-6. Workdir starts and executes commands correctly in binary, AppImage, and Flatpak builds.
-
-Flathub submission and reviewer notes are documented in:
-
-- `packaging/flatpak/FLATHUB_SUBMISSION.md`
+2. `workdir-bin` AUR metadata points to the latest `workdir-archlinux-x86_64-v<tag>` release asset.
+3. Debian and RPM source packaging workflows run successfully for the target tag.
+4. Workdir starts and executes commands correctly in binary and AppImage builds.
 
 # Contributing 
 

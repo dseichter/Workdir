@@ -358,10 +358,6 @@ class WorkDirFrame(gui.MainFrame):
         parameters = cmd['parameters'].replace('{directory}', directory)
         executecmd = command + ' ' + parameters
 
-        if self._is_running_in_flatpak():
-            # Run user commands on the host from Flatpak sandbox.
-            executecmd = f"flatpak-spawn --host sh -lc {shlex.quote(executecmd)}"  # NOSONAR
-
         env = os.environ.copy()
 
         if cmd['use_env']:
@@ -427,10 +423,6 @@ class WorkDirFrame(gui.MainFrame):
         return message_box.exec()
 
     @staticmethod
-    def _is_running_in_flatpak() -> bool:
-        return bool(os.environ.get('FLATPAK_ID')) or os.path.exists('/.flatpak-info')
-
-    @staticmethod
     def _host_executable_from_command(executable: str) -> str:
         if os.path.isabs(executable):
             return os.path.basename(executable)
@@ -458,23 +450,6 @@ class WorkDirFrame(gui.MainFrame):
         executable = parts[0]
         if executable.lower() in shell_builtins:
             return True
-
-        if cls._is_running_in_flatpak():
-            host_executable = cls._host_executable_from_command(executable)
-            try:
-                result = subprocess.run(  # nosec B603, B607  # NOSONAR
-                    [
-                        'flatpak-spawn',
-                        '--host',
-                        'sh',
-                        '-lc',
-                        f"command -v {shlex.quote(host_executable)} >/dev/null 2>&1",
-                    ],
-                    check=False,
-                )
-                return result.returncode == 0
-            except OSError:
-                return False
 
         if os.path.isabs(executable) or os.path.sep in executable:
             return os.path.isfile(executable)

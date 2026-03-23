@@ -15,13 +15,6 @@ yay -S workdir-bin
 sudo rpm -i workdir-*.rpm
 ```
 
-## Flatpak
-
-```bash
-flatpak install flathub io.github.dseichter.workdir
-flatpak run io.github.dseichter.workdir
-```
-
 Via the configuration (menu Extras) you can specify your directories and store up to six commands.
 
 ![Workdir - Configuration](assets/screenshots/configuration.png)
