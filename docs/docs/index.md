@@ -11,10 +11,11 @@ Workdir helps you work with multiple directories and run commands without manual
 
 Binaries for Windows and Linux are available (see [releases](https://github.com/dseichter/Workdir/releases)). Linux users can also install native packages (`.deb`, `.rpm`, AUR `workdir-bin`).
 
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dseichter/Workdir/total)](https://github.com/dseichter/Workdir/releases)
-![GitHub License](https://img.shields.io/github/license/dseichter/Workdir)
-[![GitHub Issues](https://img.shields.io/github/issues/dseichter/Workdir)](https://github.com/dseichter/Workdir/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/dseichter/Workdir)](https://github.com/dseichter/Workdir/pulls)
+[![GitHub Downloads (latest release assets)](https://badgen.net/github/assets-dl/dseichter/Workdir)](https://github.com/dseichter/Workdir/releases)
+[![GitHub Stars](https://badgen.net/github/stars/dseichter/Workdir)](https://github.com/dseichter/Workdir/stargazers)
+![GitHub License](https://badgen.net/github/license/dseichter/Workdir)
+[![GitHub Open Issues](https://badgen.net/github/open-issues/dseichter/Workdir)](https://github.com/dseichter/Workdir/issues)
+[![GitHub Open Pull Requests](https://badgen.net/github/open-prs/dseichter/Workdir)](https://github.com/dseichter/Workdir/pulls)
 
 ## Features
 

@@ -7,9 +7,10 @@ Working with multiple directories and execute commands without navigate to them 
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/dseichter/Workdir?style=flat-square" alt="Release">
-  <img src="https://img.shields.io/github/downloads/dseichter/Workdir/total?style=flat-square" alt="Downloads">
-  <img src="https://img.shields.io/github/license/dseichter/Workdir?style=flat-square" alt="License">
+  <img src="https://badgen.net/github/release/dseichter/Workdir" alt="Release">
+  <img src="https://badgen.net/github/assets-dl/dseichter/Workdir" alt="Downloads (latest release assets)">
+  <img src="https://badgen.net/github/stars/dseichter/Workdir" alt="Stars">
+  <img src="https://badgen.net/github/license/dseichter/Workdir" alt="License">
 </p>
 
 <p align="center">
