@@ -20,7 +20,7 @@ classifiers = [
 dependencies = [
     "PySide6>=6.10.2",
     "urllib3>=2.6.3",
-    "packaging>=24.0"
+    "packaging>=26.1"
 ]
 
 [project.scripts]
