@@ -7,10 +7,10 @@ Working with multiple directories and execute commands without navigate to them 
 </p>
 
 <p align="center">
-  <img src="https://badgen.net/github/release/dseichter/Workdir" alt="Release">
-  <img src="https://badgen.net/github/assets-dl/dseichter/Workdir" alt="Downloads (latest release assets)">
-  <img src="https://badgen.net/github/stars/dseichter/Workdir" alt="Stars">
-  <img src="https://badgen.net/github/license/dseichter/Workdir" alt="License">
+  <img src="https://img.shields.io/github/v/release/dseichter/Workdir" alt="Release">
+  <img src="https://img.shields.io/github/downloads/dseichter/Workdir/total" alt="Downloads">
+  <img src="https://img.shields.io/github/stars/dseichter/Workdir" alt="Stars">
+  <img src="https://img.shields.io/github/license/dseichter/Workdir" alt="License">
 </p>
 
 <p align="center">
@@ -22,7 +22,6 @@ Working with multiple directories and execute commands without navigate to them 
 <p align="center">
 <img src="https://github.com/dseichter/Workdir/actions/workflows/ruff.yml/badge.svg" alt="ruff">
 <img src="https://github.com/dseichter/Workdir/actions/workflows/bandit.yml/badge.svg" alt="bandit">
-<img src="https://github.com/dseichter/Workdir/actions/workflows/trivy.yml/badge.svg" alt="trivy">
 <a href="https://sonarcloud.io/summary/new_code?id=dseichter_Workdir"><img src="https://sonarcloud.io/api/project_badges/measure?project=dseichter_Workdir&metric=alert_status" alt="Quality Gate Status"></a>
 </p>
 
