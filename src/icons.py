@@ -6,10 +6,10 @@
 from PySide6.QtGui import QIcon
 
 try:
-    import resources_rc  # noqa: F401
+    import resources_rc
 except ImportError:
     try:
-        from . import resources_rc  # type: ignore # noqa: F401
+        from . import resources_rc  # type: ignore
     except ImportError:
         resources_rc = None
 

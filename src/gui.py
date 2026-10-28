@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 # Copyright (c) 2024-2026 Daniel Seichter
 #
@@ -16,9 +15,22 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-from PySide6.QtWidgets import QMainWindow, QWidget, QDialog, QColorDialog, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QCheckBox, QPushButton, QTextEdit, QDialogButtonBox
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction, QColor
+from PySide6.QtWidgets import (
+    QCheckBox,
+    QColorDialog,
+    QDialog,
+    QDialogButtonBox,
+    QGridLayout,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QPushButton,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
+)
 
 ###########################################################################
 ## Class MainFrame

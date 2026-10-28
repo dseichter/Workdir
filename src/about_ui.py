@@ -19,7 +19,6 @@ import gui
 import helper
 import icons
 
-
 GITHUB_URL = "https://github.com/dseichter/Workdir"
 LOGO_ICON_NAME = "folder_open_48dp_8B1A10_FILL0_wght400_GRAD0_opsz48"
 LOGO_SIZE = 48

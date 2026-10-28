@@ -21,7 +21,7 @@ import sys
 import webbrowser
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QEvent, QStandardPaths, QThread, QTimer, Signal, Qt
+from PySide6.QtCore import QEvent, QObject, QStandardPaths, Qt, QThread, QTimer, Signal
 from PySide6.QtGui import QCursor
 from PySide6.QtWidgets import (
     QApplication,
